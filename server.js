@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
+const connectDB = require('./config/db');
 
-app.get('/'), (req, res) => res.json({msg: 'Hello World'});
+connectDB();
+
+app.use(express.json({ extended: false}));
+app.get('/'), (req, res) => res.json({msg: 'Test'});
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contacts', require('./routes/contacts'));
