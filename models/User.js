@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// lisence 
+// User
 const UserSchema = mongoose.Schema({
     name: {
         type: String,
