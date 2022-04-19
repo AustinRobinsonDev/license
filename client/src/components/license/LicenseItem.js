@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { DELETE_LICENSE } from '../../actions/types';
+import { deleteLicense, clearCurrent, setCurrent } from '../../actions/licenseActions'
+import { connect } from 'react-redux';
 
-const LicenseItem = (props) => {
-
-     const { _id, name, email, phone, type} = license;
+const LicenseItem = (props, { licenses: { current }}) => {
+    const { _id, name, email, phone, type} = props.license;
 
     const onDelete = () => {
-        DELETE_LICENSE(_id);
+        deleteLicense(_id);
         clearCurrent();
     }
     const onEdit = () => {
@@ -37,7 +37,7 @@ const LicenseItem = (props) => {
            </ul>
            <p>
                <button className='btn btn-dark btn-sm' onClick={() => {
-                   setCurrent(license);
+                   setCurrent(props.license);
                     onEdit();
                    }}>Edit</button>
                <button className='btn btn-danger btn-sm' onClick={onDelete}>Delete</button>
@@ -50,4 +50,8 @@ LicenseItem.propTypes = {
     license: PropTypes.object.isRequired,
 }
 
-export default LicenseItem
+const mapStateToProps = state => ({
+    licenses: state.licenses
+  });
+
+export default connect(mapStateToProps, { deleteLicense, clearCurrent, setCurrent, })(LicenseItem);

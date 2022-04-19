@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-const ContactSchema = mongoose.Schema({
+const LicenseSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
@@ -28,4 +28,4 @@ const ContactSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('contact', ContactSchema);
+module.exports = mongoose.model('license', LicenseSchema);

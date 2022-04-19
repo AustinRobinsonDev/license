@@ -1,4 +1,4 @@
-
+import { connect } from 'react-redux';
 
 const Alerts = () => {
 
@@ -9,4 +9,4 @@ const Alerts = () => {
     )
 }
 
-export default Alerts
+export default connect()(Alerts);

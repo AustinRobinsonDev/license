@@ -1,18 +1,6 @@
-
+import { connect } from 'react-redux';
 
 const Login = props => {
-
-//   useEffect(() => {
-//     if (isAuthenticated) {
-//       props.history.push('/');
-//     }
-
-//     if (error === 'Invalid Credentials') {
-//       setAlert(error, 'danger');
-//       clearErrors();
-//     }
-//     // eslint-disable-next-line
-//   }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     email: '',
@@ -73,4 +61,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default connect()(Login);

@@ -7,21 +7,21 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User');
-const Contact = require('../models/Contact');
-// @route   GET api/contacts
-// @desc    Get the users contacts
+const License = require('../models/License');
+// @route   GET api/licenses
+// @desc    Get the users licenses
 // @acess   Private
 router.get('/', auth, async (req, res) => {
    try {
-       const contacts = await Contact.find({ user: req.user.id}).sort({ date: -1 });
-       res.json(contacts)
+       const licenses = await License.find({ user: req.user.id}).sort({ date: -1 });
+       res.json(licenses)
    } catch (err) {
        res.status(500).send('server error');
    }
 });
 
-// @route   POST api/contacts
-// @desc    Add contacts
+// @route   POST api/licenses
+// @desc    Add license
 // @acess   Private
 router.post('/',    
 [
@@ -34,7 +34,7 @@ async (req, res) => {
     }
     const {name, email, phone, type} = req.body;
     try {
-        const newContact = new Contact({
+        const newLicense = new License({
             name,
             email,
             phone, 
@@ -42,9 +42,9 @@ async (req, res) => {
             user: req.user.id
         })
         //saves to db
-        const contact = await newContact.save();
+        const license = await newLicense.save();
         // sends to client 
-        res.json(contact);
+        res.json(license);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('server error');
@@ -52,45 +52,45 @@ async (req, res) => {
 
 });
 
-// @route   PUT api/contacts/:id
-// @desc    Update contacts
+// @route   PUT api/licenses/:id
+// @desc    Update license
 // @acess   Private
 router.put('/:id', auth, async (req, res) => {
     const {name, email, phone, type} = req.body;
     // license object
-    const contactFields = {};
-    if(name) contactFields.name = name;
-    if(email) contactFields.email = email;
-    if(phone) contactFields.phone = phone;
-    if(type) contactFields.type = type;
+    const licenseFields = {};
+    if(name) licenseFields.name = name;
+    if(email) licenseFields.email = email;
+    if(phone) licenseFields.phone = phone;
+    if(type) licenseFields.type = type;
     try {
-        let contact = await Contact.findById(req.params.id);
-        if(!contact) return res.status(404).json({ msg: 'Contact not found'});
-        if (contact.user.toString() !== req.user.id) {
+        let license = await License.findById(req.params.id);
+        if (!license) return res.status(404).json({ msg: 'License not found'});
+        if (license.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized'});
         }
-        contact = await Contact.findByIdAndUpdate(req.params.id, 
-            { $set: contactFields },
+        license = await License.findByIdAndUpdate(req.params.id, 
+            { $set: licenseFields },
             {  new: true });
-            res.json(contact);
+            res.json(license);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('server error');
     }
 });
 
-// @route   DELETE api/contacts/:id
-// @desc    Delete contacts
+// @route   DELETE api/license/:id
+// @desc    Delete license
 // @acess   Private
 router.delete('/:id', auth, async (req, res) => {
     try {
-        let contact = await Contact.findById(req.params.id);
-        if(!contact) return res.status(404).json({ msg: 'Contact not found'});
-        if (contact.user.toString() !== req.user.id) {
+        let license = await Contact.findById(req.params.id);
+        if(!license) return res.status(404).json({ msg: 'License not found'});
+        if (license.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized'});
         }
-        await Contact.findByIdAndRemove(req.params.id);
-        res.json({ msg: 'contact removed'});
+        await License.findByIdAndRemove(req.params.id);
+        res.json({ msg: 'License removed'});
     } catch (err) {
         console.error(err.message);
         res.status(500).send('server error');

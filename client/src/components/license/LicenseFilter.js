@@ -1,6 +1,8 @@
 import React, {useContext, useRef, useEffect } from 'react';
+import { clearFilter, filterLicenses } from '../../actions/licenseActions'
+import { connect } from 'react-redux';
 
-const LicenseFilter = () => {
+const LicenseFilter = ({licenses: {filtered, }}) => {
     const text = useRef('');
     useEffect(() => {
         if (filtered === null) {
@@ -21,4 +23,8 @@ const LicenseFilter = () => {
     )
 }
 
-export default LicenseFilter
+const mapStateToProps = state = ({
+    licenses: state.licenses
+});
+
+export default connect(mapStateToProps, { clearFilter, filterLicenses })(LicenseFilter);

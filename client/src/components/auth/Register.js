@@ -1,4 +1,4 @@
-
+import { connect } from 'react-redux';
 
 const Register = (props) => {
     // useEffect(() => {
@@ -66,4 +66,4 @@ const Register = (props) => {
     )
 }
 
-export default Register
+export default connect()(Register);

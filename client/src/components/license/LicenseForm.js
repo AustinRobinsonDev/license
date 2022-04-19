@@ -1,14 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-
-const LicenseForm = () => {
-
+import { connect } from 'react-redux';
+import { addLicense, updateLicense, clearCurrent } from '../../actions/licenseActions'
+const LicenseForm = ({addLicense, updateLicense, license: {current}}) => {
     const [license, setLicense] = useState({
         name: '',
         email: '',
-        phone: [],
+        phone: '',
         type: ''
     });
-
     const { name, email, phone, type} = license;
     const onChange = e => {
         setLicense({ ...license, [e.target.name]: e.target.value});
@@ -21,7 +20,7 @@ const LicenseForm = () => {
             setLicense({        
                 name: '',
                 email: '',
-                phone: [],
+                phone: '',
                 type: ''
             })
         }
@@ -60,4 +59,8 @@ const LicenseForm = () => {
     )
 }
 
-export default LicenseForm;
+const mapStateToProps = state => ({
+    license: state.license
+});
+
+export default connect(mapStateToProps, { addLicense, updateLicense, clearCurrent })(LicenseForm);

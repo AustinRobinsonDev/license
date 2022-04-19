@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Navbar from './components/layout/Navbar';
 import store from './store';
 const App = () => {
   return (
