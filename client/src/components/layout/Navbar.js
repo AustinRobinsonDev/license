@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
-import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import { logout } from '../../actions/authActions';
 import {clearLicense} from '../../actions/licenseActions';
 
-const Navbar = ({auth, logout, clearLicense}) => {
+const Navbar = ({history, auth, logout, clearLicense}) => {
     console.log("navbar isauth: " + auth.isAuthenticated);
 
     const registerLink =(e) => {

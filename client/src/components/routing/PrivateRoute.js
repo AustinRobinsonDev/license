@@ -1,13 +1,8 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { useHistory } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, auth, ...rest  }) => {
-    let history = useHistory();
-    if(!auth.isAuthenticated) {
-        history.push('/login')
-    }
     console.log("auth: " + auth.isAuthenticated)
     return (
         <div>

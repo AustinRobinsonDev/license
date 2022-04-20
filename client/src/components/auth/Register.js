@@ -2,11 +2,8 @@ import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alertActions';
 import { clearErrors, register } from '../../actions/authActions';
-import {withRouter,useHistory} from 'react-router-dom';
-import {  } from "react-router-dom";
 
-const Register = ({ auth, setAlert, clearErrors, register}) => {
-    let history = useHistory();
+const Register = ({ history, auth, setAlert, clearErrors, register}) => {
 
     useEffect(() => {
         if (auth.isAuthenticated) {
@@ -78,4 +75,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default withRouter(connect(mapStateToProps, { clearErrors, setAlert, register })(Register));
+export default connect(mapStateToProps, { clearErrors, setAlert, register })(Register);

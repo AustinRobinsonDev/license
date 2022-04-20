@@ -4,8 +4,7 @@ import { login, clearErrors } from '../../actions/authActions';
 import { setAlert } from '../../actions/alertActions';
 import {withRouter,useHistory} from 'react-router-dom';
 
-const Login = ({auth, setAlert, login}) => {
-  let history = useHistory();
+const Login = ({history, auth, setAlert, login}) => {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
@@ -84,4 +83,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default withRouter(connect(mapStateToProps, {setAlert, login})(Login));
+export default connect(mapStateToProps, {setAlert, login})(Login);
