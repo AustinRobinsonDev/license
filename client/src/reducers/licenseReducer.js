@@ -1,4 +1,4 @@
-import {GET_LICENSES, 
+import { GET_LICENSES, 
         SET_LOADING, 
         LICENSE_ERROR, 
         ADD_LICENSE, 

@@ -1,16 +1,19 @@
+import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alertActions';
+import { clearErrors, register } from '../../actions/authActions';
 
-const Register = (props) => {
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         props.history.push('/');
-    //     }
-    //     if(error === 'User already exists'){
-    //         setAlert(error, 'danger');
-    //         clearErrors();
-    //     }
-    //     //eslint-disable-next-line
-    // },[error, isAuthenticated, props.history])
+const Register = ({history, license: {auth: isAuthenticated, error}}) => {
+    useEffect(() => {
+        if (isAuthenticated) {
+            history.push('/');
+        }
+        if(error === 'User already exists'){
+            setAlert(error, 'danger');
+            clearErrors();
+        }
+        //eslint-disable-next-line
+    },[error, isAuthenticated, history])
 
     const [user, setUser] = useState({
         name: '',
@@ -30,6 +33,7 @@ const Register = (props) => {
         } else if (password !== password2) {
             setAlert('Passwords do not match')
         } else {
+            console.log("User data: ", {name, email, password})
             register({
                 name,
                 email,
@@ -66,4 +70,8 @@ const Register = (props) => {
     )
 }
 
-export default connect()(Register);
+const mapStateToProps = (state) => ({
+    license: state.license
+});
+
+export default connect(mapStateToProps, { clearErrors, setAlert, register })(Register);

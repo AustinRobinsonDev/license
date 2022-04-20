@@ -1,4 +1,3 @@
-import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { deleteLicense, clearCurrent, setCurrent } from '../../actions/licenseActions'
 import { connect } from 'react-redux';

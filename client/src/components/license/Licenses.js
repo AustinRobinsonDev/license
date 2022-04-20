@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { getLicenses } from '../../actions/licenseActions'
 import { connect } from 'react-redux';
 import LicenseItem from '../license/LicenseItem';
-// import Spinner from '../layout/Spinner';
+import Spinner from '../layout/Spinner';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const Licenses = ({license: {licenses, loading, filtered}}) => {
@@ -48,4 +48,4 @@ const mapStateToProps = state => ({
   license: state.license
 });
 
-export default connect(mapStateToProps, {getLicense})(Licenses);
+export default connect(mapStateToProps, {getLicenses})(Licenses);

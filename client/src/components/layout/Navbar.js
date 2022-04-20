@@ -1,10 +1,13 @@
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
+import {logout} from '../../actions/authActions';
+import {clearLicense} from '../../actions/licenseActions';
 
-const Navbar = ({ title, icon }) => {
+const Navbar = ({license: { auth: isAuthenticated, user}}) => {
     const onLogout = () => {
         logout();
+        clearLicense();
     }
 
     const authLinks = (
@@ -30,7 +33,7 @@ const Navbar = ({ title, icon }) => {
     )
     return (
         <div className='navbar bg-primary'>
-            <h1>{title}{' '}{icon}</h1>
+            <h1>License Manager{' '}Icon</h1>
             <ul>
                 {isAuthenticated ? authLinks : guestLinks}
             </ul>
@@ -38,14 +41,8 @@ const Navbar = ({ title, icon }) => {
     )
 }
 
-Navbar.propTypes = {
-    title: PropTypes.string.isRequired,
-    icon: PropTypes.element
-}
+const mapStateToProps = state => ({
+    license: state.license
+});
 
-Navbar.defaultProps = {
-    title: 'License System',
-    icon: <FontAwesome className="fa-solid fa-map" name="map"/>
-}
-
-export default Navbar;
+export default connect(mapStateToProps, { logout, clearLicense })(Navbar);

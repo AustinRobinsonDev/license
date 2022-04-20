@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
  import licenseReducer from './licenseReducer';
-export default combineReducers({ license: licenseReducer });
+ import authReducer from './authReducer';
+ import alertReducer from './alertReducer';
+export default combineReducers({ license: licenseReducer, auth: authReducer, alert: alertReducer });

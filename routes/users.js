@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
-const {check, validationResult} = require('express-validator/check');
+const {check, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -16,12 +16,14 @@ router.post('/',
     check('password', 'Please enter a password with at least 6 characters').isLength({ min: 6})
 ], 
     async (req, res) => {
+        console.log("register made it to the api!")
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array()})
         }
         const { name, email, password, } = req.body;
-
+        console.log("req: " + req)
+        console.log("res: " + res)
         try {
             let user = await User.findOne({ email })
             if (user) {

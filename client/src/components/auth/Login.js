@@ -1,17 +1,33 @@
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { login, clearErrors } from '../../actions/authActions';
+import { setAlert } from '../../actions/alertActions';
+const Login = ({history, license: { auth: isAuthenticated, error }}) => {
+  console.log(isAuthenticated)
+  console.log(error)
 
-const Login = props => {
-
-  const [user, setUser] = useState({
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/');
+    }
+    if (error === 'Invalid Credentials') {
+      console.log('error invalid credentials')
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, history]);
+  const [user1, setUser1] = useState({
     email: '',
     password: ''
   });
 
-  const { email, password } = user;
+  const { email, password } = user1;
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = e => setUser1({ ...user1, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
+    console.log('onSubmit clicked')
     e.preventDefault();
     if (email === '' || password === '') {
       setAlert('Please fill in all fields', 'danger');
@@ -20,6 +36,7 @@ const Login = props => {
         email,
         password
       });
+      console.log('login called')
     }
   };
 
@@ -61,4 +78,8 @@ const Login = props => {
   );
 };
 
-export default connect()(Login);
+const mapStateToProps = state => ({
+  license: state.license
+});
+
+export default connect(mapStateToProps, {setAlert, login})(Login);
