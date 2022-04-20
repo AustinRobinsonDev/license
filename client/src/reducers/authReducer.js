@@ -9,7 +9,7 @@ import {REGISTER_SUCCESS,
 
 const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: false,
+    isAuthenticated: null,
     loading: true,
     user: null,
     error: []

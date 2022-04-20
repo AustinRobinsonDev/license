@@ -5,20 +5,20 @@ import LicenseItem from '../license/LicenseItem';
 import Spinner from '../layout/Spinner';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 
-const Licenses = ({license: {licenses, loading, filtered}}) => {
+const Licenses = ({license, auth, getLicenses}) => {
     useEffect(() => {
         getLicenses();
         //eslint-disable-next-line
     },[])
-    if (licenses !== null && licenses.length === 0 && !loading){
+    if (license.licenses !== null && license.licenses.length === 0 && !auth.loading){
         return <h4>Please add a contact</h4>
     }
     return (
         <>
-        {licenses !== null && !loading ? (
+        {license.licenses !== null && !auth.loading ? (
         <TransitionGroup>
-          {filtered !== null
-            ? filtered.map(license => (
+          {license.filtered !== null
+            ? license.filtered.map(license => (
                 <CSSTransition
                   key={license._id}
                   timeout={500}
@@ -27,7 +27,7 @@ const Licenses = ({license: {licenses, loading, filtered}}) => {
                   <LicenseItem license={license} />
                 </CSSTransition>
               ))
-            : licenses.map(license=> (
+            : license.licenses.map(license=> (
                 <CSSTransition
                   key={license._id}
                   timeout={500}
@@ -45,7 +45,8 @@ const Licenses = ({license: {licenses, loading, filtered}}) => {
 }
 
 const mapStateToProps = state => ({
-  license: state.license
+  license: state.license,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, {getLicenses})(Licenses);

@@ -2,7 +2,7 @@ import React, {useRef, useEffect } from 'react';
 import { clearFilter, filterLicenses } from '../../actions/licenseActions'
 import { connect } from 'react-redux';
 
-const LicenseFilter = ({licenses: {filtered }}) => {
+const LicenseFilter = ({clearFilter, filterLicense, license: {filtered}}) => {
     const text = useRef('');
     useEffect(() => {
         if (filtered === null) {

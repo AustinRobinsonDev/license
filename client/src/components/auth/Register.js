@@ -2,18 +2,22 @@ import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alertActions';
 import { clearErrors, register } from '../../actions/authActions';
+import {withRouter,useHistory} from 'react-router-dom';
+import {  } from "react-router-dom";
 
-const Register = ({history, license: {auth: isAuthenticated, error}}) => {
+const Register = ({ auth, setAlert, clearErrors, register}) => {
+    let history = useHistory();
+
     useEffect(() => {
-        if (isAuthenticated) {
+        if (auth.isAuthenticated) {
             history.push('/');
         }
-        if(error === 'User already exists'){
-            setAlert(error, 'danger');
+        if(auth.error === 'User already exists'){
+            setAlert(auth.error, 'danger');
             clearErrors();
         }
         //eslint-disable-next-line
-    },[error, isAuthenticated, history])
+    },[auth.error, auth.isAuthenticated, history])
 
     const [user, setUser] = useState({
         name: '',
@@ -71,7 +75,7 @@ const Register = ({history, license: {auth: isAuthenticated, error}}) => {
 }
 
 const mapStateToProps = (state) => ({
-    license: state.license
+    auth: state.auth
 });
 
-export default connect(mapStateToProps, { clearErrors, setAlert, register })(Register);
+export default withRouter(connect(mapStateToProps, { clearErrors, setAlert, register })(Register));

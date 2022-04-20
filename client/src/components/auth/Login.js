@@ -2,29 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { login, clearErrors } from '../../actions/authActions';
 import { setAlert } from '../../actions/alertActions';
-const Login = ({history, license: { auth: isAuthenticated, error }}) => {
-  console.log(isAuthenticated)
-  console.log(error)
+import {withRouter,useHistory} from 'react-router-dom';
+
+const Login = ({auth, setAlert, login}) => {
+  let history = useHistory();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (auth.isAuthenticated) {
       history.push('/');
     }
-    if (error === 'Invalid Credentials') {
+    if (auth.error === 'Invalid Credentials') {
       console.log('error invalid credentials')
-      setAlert(error, 'danger');
+      setAlert(auth.error, 'danger');
       clearErrors();
     }
     // eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
-  const [user1, setUser1] = useState({
+  }, [auth.error, auth.isAuthenticated, history]);
+  const [user, setUser] = useState({
     email: '',
     password: ''
   });
 
-  const { email, password } = user1;
+  const { email, password } = user;
 
-  const onChange = e => setUser1({ ...user1, [e.target.name]: e.target.value });
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     console.log('onSubmit clicked')
@@ -35,7 +36,8 @@ const Login = ({history, license: { auth: isAuthenticated, error }}) => {
       login({
         email,
         password
-      });
+      })
+      history.push('/home');
       console.log('login called')
     }
   };
@@ -79,7 +81,7 @@ const Login = ({history, license: { auth: isAuthenticated, error }}) => {
 };
 
 const mapStateToProps = state => ({
-  license: state.license
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, {setAlert, login})(Login);
+export default withRouter(connect(mapStateToProps, {setAlert, login})(Login));

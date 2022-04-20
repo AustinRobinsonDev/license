@@ -11,6 +11,7 @@ import Navbar from './components/layout/Navbar';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 
+
 if (localStorage.token){
   setAuthToken(localStorage.token)
 } 
@@ -18,19 +19,17 @@ if (localStorage.token){
 const App = () => {
   return (
     <Provider store={store}>
-    <Router>
-      <>
-      <Navbar />
-
-        <Switch>
-          <PrivateRoute exact path='/' component={Home} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/login' component={Login} />
-        </Switch>
-      </>
-    </Router>
-
+      <Router>
+        <>
+        <Navbar />
+          <Switch>
+            <Route exact path='/about' component={About} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <PrivateRoute exact path='/' component={Home} />
+          </Switch>
+        </>
+      </Router>
     </Provider>
   );
 }
