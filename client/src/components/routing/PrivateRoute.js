@@ -1,19 +1,17 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-const PrivateRoute = ({ component: Component, auth, ...rest  }) => {
-    console.log("auth: " + auth.isAuthenticated)
-    return (
-        <div>
-        <Switch>
-            <Route { ...rest} render={props => !auth.isAuthenticated && !auth.loading ? (
-                <Redirect push to='/login' />
-            ) : (<Component {...props} /> )} />
-        </Switch>
-        </div>
-    )
-}
+const PrivateRoute = ({
+    auth,
+    redirectPath = '/login',
+    children
+  }) => {
+    const isAuth = localStorage.token;
+    const renderComponents = () => {
+      console.log("Pr auth: " + auth.isAuthenticated)
+      return isAuth ? children : <Navigate to={redirectPath} replace /> 
+    }
+    return renderComponents();
+  };
 
 const mapStateToProps = state => ({
     auth: state.auth

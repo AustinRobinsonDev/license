@@ -1,10 +1,15 @@
 import LicenseForm from '../components/license/LicenseForm';
 import LicenseFilter from '../components/license/LicenseFilter';
 import Licenses from '../components/license/Licenses';
-
-const Home = (props) => {
+import { connect } from 'react-redux';
+import { loadUser } from '../actions/authActions';
+import {useEffect} from 'react'
+const Home = ({auth, loadUser}) => {
+    useEffect(() => {
+        if (auth.isAuthenticated) loadUser();
+    }, [auth.isAuthenticated])  
     return (
-        <div>
+        <div className='grid-2'>
             <div>
                 <LicenseForm />
             </div>
@@ -16,4 +21,8 @@ const Home = (props) => {
     )
 }
 
-export default Home
+const mapStateToProps= state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, {loadUser})(Home)

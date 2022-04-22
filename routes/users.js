@@ -19,6 +19,7 @@ router.post('/',
         console.log("register made it to the api!")
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log("errors in reg api: " + errors)
             return res.status(400).json({ errors: errors.array()})
         }
         const { name, email, password, } = req.body;

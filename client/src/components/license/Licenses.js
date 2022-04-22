@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { getLicenses } from '../../actions/licenseActions'
 import { connect } from 'react-redux';
 import LicenseItem from '../license/LicenseItem';
-import Spinner from '../layout/Spinner';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const Licenses = ({license, auth, getLicenses}) => {
@@ -38,7 +37,8 @@ const Licenses = ({license, auth, getLicenses}) => {
               ))}
         </TransitionGroup>
       ) : (
-        <Spinner />
+   
+        <div></div>
       )}
     </>
     )

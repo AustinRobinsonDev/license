@@ -10,6 +10,7 @@ import setAuthToken from '../utils/setAuthToken';
 import axios from 'axios';
 export const loadUser = () => async dispatch => {
     setAuthToken(localStorage.token);
+
     try {
         const res = await axios.get('/api/auth');
         dispatch({
@@ -20,10 +21,8 @@ export const loadUser = () => async dispatch => {
         dispatch({ type: AUTH_ERROR });
     }
 };
-
+ 
 export const register = (formData) => async dispatch => {
-    console.log('register action triggered')
-    console.log("register has been called");
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -31,7 +30,6 @@ export const register = (formData) => async dispatch => {
     };
     try {
         const res = await axios.post('/api/users', formData, config);
-        console.log(res)
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -46,8 +44,6 @@ export const register = (formData) => async dispatch => {
 };
 
 export const login = formData => async dispatch => {
-    console.log('Login action triggered')
-
     const config = {
         headers: {
             'Content-Type': 'application/json'

@@ -1,6 +1,3 @@
-import React from 'react'
-import {withRouter} from 'react-router-dom';
-
 const About = () => {
     return (
         <div>
@@ -11,4 +8,4 @@ const About = () => {
     )
 }
 
-export default withRouter(About)
+export default About

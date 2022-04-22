@@ -1,43 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { login, clearErrors } from '../../actions/authActions';
+import { login, clearErrors, loadUser } from '../../actions/authActions';
 import { setAlert } from '../../actions/alertActions';
-import {withRouter,useHistory} from 'react-router-dom';
-
-const Login = ({history, auth, setAlert, login}) => {
-
-  useEffect(() => {
-    if (auth.isAuthenticated) {
-      history.push('/');
-    }
-    if (auth.error === 'Invalid Credentials') {
-      console.log('error invalid credentials')
-      setAlert(auth.error, 'danger');
-      clearErrors();
-    }
-    // eslint-disable-next-line
-  }, [auth.error, auth.isAuthenticated, history]);
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios';
+const Login = ({auth, setAlert, login}) => {
+  const location = useLocation();
+  let navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
-
+  useEffect(() => {
+    if (auth.error === 'Invalid Credentials') {
+      setAlert(auth.error, 'danger');
+      clearErrors();
+    }
+    // eslint-disable-next-line
+  }, [auth.error]);
   const { email, password } = user;
 
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
-    console.log('onSubmit clicked')
+  const onSubmit = async e => {
     e.preventDefault();
     if (email === '' || password === '') {
       setAlert('Please fill in all fields', 'danger');
     } else {
-      login({
+      console.log("Login component isAuth: " + auth.isAuthenticated)
+      await login({
         email,
         password
       })
-      history.push('/home');
-      console.log('login called')
+      navigate("/")
     }
   };
 
@@ -69,11 +64,12 @@ const Login = ({history, auth, setAlert, login}) => {
             required
           />
         </div>
-        <input
-          type='submit'
-          value='Login'
-          className='btn btn-primary btn-block'
-        />
+
+          <input
+            type='submit'
+            value='Login'
+            className='btn btn-primary btn-block'
+          />
       </form>
     </div>
   );
@@ -83,4 +79,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {setAlert, login})(Login);
+export default connect(mapStateToProps, { setAlert, login })(Login);
