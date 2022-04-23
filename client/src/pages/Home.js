@@ -13,6 +13,7 @@ const Home = ({auth, loadUser}) => {
         getLicenses();
         //eslint-disable-next-line
     }, [action])  
+    console.log(action)
     return (
         <>
             <div className='container px-3'>

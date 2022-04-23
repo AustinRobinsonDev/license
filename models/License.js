@@ -1,5 +1,3 @@
-// lisence
-
 const mongoose = require('mongoose')
 
 const LicenseSchema = mongoose.Schema({
@@ -7,24 +5,42 @@ const LicenseSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
-    name: {
+    title: {
         type: String,
         required: true
     },
-    email: {
+    orderId: {
+        type: String,
+        required: true
+    },
+    remainingBalance: {
         type: String,
         required: true,
     },
-    phone: {
+    hasDocuments: {
+        type: Boolean,
+    },
+    dateCreated: {
+        type: Date,
+        default: Date.now
+    },
+    contactFirstName: {
         type: String,
+        required: true
+    },
+    contactLastName: {
+        type: String,
+        required: true
+    },
+    emailPrimary: {
+        type: String
+    },
+    phonePrimary: {
+        type: String
     },
     type: {
         type: String,
-        default: 'personal'
-    },
-    date: {
-        type: Date,
-        default: Date.now
+        default: 'Corp'
     }
 })
 

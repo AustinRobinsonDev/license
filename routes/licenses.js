@@ -25,19 +25,25 @@ router.get('/', auth, async (req, res) => {
 // Private
 router.post('/',    
 [
-    auth, [ check('name', 'name is required').not().isEmpty() ]
+    auth, [ check('title', 'title is required').not().isEmpty() ]
 ],  
 async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()})
     }
-    const {name, email, phone, type} = req.body;
+    const { title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type } = req.body;
     try {
         const newLicense = new License({
-            name,
-            email,
-            phone, 
+            title,
+            orderId: Date.now(),
+            remainingBalance: '150',
+            hasDocuments, 
+            dateCreated: Date.now(),
+            contactFirstName,
+            contactLastName,
+            emailPrimary,
+            phonePrimary,
             type,
             user: req.user.id
         })
@@ -56,12 +62,18 @@ async (req, res) => {
 // Update license
 // Private
 router.put('/:id', auth, async (req, res) => {
-    const {name, email, phone, type} = req.body;
+    const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrititle, type} = req.body;
     // license object
     const licenseFields = {};
-    if(name) licenseFields.name = name;
-    if(email) licenseFields.email = email;
-    if(phone) licenseFields.phone = phone;
+    if(title) licenseFields.title = title;
+    if(orderId) licenseFields.orderId = orderId;
+    if(remainingBalance) licenseFields.remainingBalance = remainingBalance;
+    if(hasDocuments) licenseFields.hasDocuments = hasDocuments;
+    if(dateCreated) licenseFields.dateCreated = dateCreated;
+    if(contactFirstName) licenseFields.contactFirstName = contactFirstName;
+    if(contactLastName) licenseFields.contactLastName = contactLastName;
+    if(emailPrimary) licenseFields.emailPrimary = emailPrimary;
+    if(phonePrimary) licenseFields.phonePrimary = phonePrimary;
     if(type) licenseFields.type = type;
     try {
         let license = await License.findById(req.params.id);
