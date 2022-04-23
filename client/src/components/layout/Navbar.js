@@ -11,19 +11,27 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
         logout();
         clearLicense();
     }
+    // const fixName = () => {
+    //     let capNames = user.name.split(" ")
+    //     let newArray;
+    //     capNames.forEach(name => {
+    //        newArray.push(name.charAt(0).toUpperCase() + user.name.slice(1));
+    //     })
+    //   //  return newArray[0] + " " + newArray[1]
+
+    // }
     const authLinks = (
         <>
-            <li>Hello {user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}</li> 
             <li>
-                <a onClick={onLogout} href="#!">
-                    <span className="hide-sm">Logout</span>
-                </a>  
+                <Link to='/'>Home</Link>
             </li>
             <li>
                 <Link to='/about'>About</Link>
             </li>
             <li>
-                <Link to='/'>Home</Link>
+                <a onClick={onLogout} href="#!">
+                    <span className="hide-sm">Logout</span>
+                </a>  
             </li>
         </>
     )
@@ -54,6 +62,7 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
     return (
         <div className='navbar bg-primary'>
             <h1>License Manager{' '}Icon</h1>
+            <h2>{user && "Hello " + user.name.charAt(0).toUpperCase() + user.name.slice(1)}</h2> 
             <ul>
                 {renderNav()}
             </ul>

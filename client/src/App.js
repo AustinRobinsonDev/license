@@ -17,25 +17,26 @@ if (localStorage.token){
 } 
 const App = ({auth}) => {
   return (
+    <div className='container'>
       <Router>
         <Fragment>
         <Navbar />
           <Routes>
-          <Route exact 
-              path='/' 
-              element={
-              <PrivateRoute auth={auth}>
-                <Home />
-              </PrivateRoute>
+            <Route exact 
+                path='/' 
+                element={
+                <PrivateRoute auth={auth}>
+                  <Home />
+                </PrivateRoute>
             }>
             </Route>
-          <Route exact path='/login' element={<Login />}/>
+            <Route exact path='/login' element={<Login />}/>
             <Route path='/about' element={<About />} />
             <Route path='/register' element={<Register />} />
-
           </Routes>
         </Fragment>
       </Router>
+    </div>
   );
 }
 

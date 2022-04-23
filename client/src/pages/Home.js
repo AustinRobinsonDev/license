@@ -13,19 +13,24 @@ const Home = ({auth, loadUser}) => {
         //eslint-disable-next-line
     }, [action])  
     return (
-        <div className='grid-2'>
-            <div>
-                <LicenseForm 
-                action={action}
-                setAction={setAction} />
+        <>
+            <div className='grid-2 px-3'>
+                <div>
+                    <LicenseForm 
+                    action={action}
+                    setAction={setAction} />
+                </div>
+                <div>
+                    <LicenseFilter />
+                    <Licenses 
+                    action={action}
+                    setAction={setAction} />
+                </div>
             </div>
             <div>
-                <LicenseFilter />
-                <Licenses 
-                action={action}
-                setAction={setAction} />
+
             </div>
-        </div>
+        </>
     )
 }
 
