@@ -59,11 +59,11 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
 
         <form className='grid-2' onSubmit={onSubmit}>
             <div className='p-2'>
-                <input type="text" placeholder="title" name="title" value={title} onChange={onChange}/>
-                <input type="text" placeholder="contactFirstName" name="contactFirstName" value={contactFirstName} onChange={onChange}/>
-                <input type="text" placeholder="contactLastName" name="contactLastName" value={contactLastName} onChange={onChange}/>
-                <input type="text" placeholder="emailPrimary" name="emailPrimary" value={emailPrimary} onChange={onChange}/>
-                <input type="text" placeholder="phonePrimary" name="phonePrimary" value={phonePrimary} onChange={onChange}/>
+                <input type="text" required placeholder="License title" name="title" value={title} onChange={onChange}/>
+                <input type="text" placeholder="First Name" name="contactFirstName" value={contactFirstName} onChange={onChange}/>
+                <input type="text" placeholder="Last Name" name="contactLastName" value={contactLastName} onChange={onChange}/>
+                <input type="text" placeholder="Email address" name="emailPrimary" value={emailPrimary} onChange={onChange}/>
+                <input type="text" placeholder="Phone Number" name="phonePrimary" value={phonePrimary} onChange={onChange}/>
             </div>
             <div className='p-2'>
                 <h3 className='py-1'>State Issued</h3>
