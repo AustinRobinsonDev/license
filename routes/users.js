@@ -11,27 +11,28 @@ const router = express.Router();
 // @access  Public
 router.post('/', 
 [
-    check('name', 'name is required').not().isEmpty(), 
-    check('email', 'please include valid email').isEmail(), 
-    check('password', 'Please enter a password with at least 6 characters').isLength({ min: 6})
+    check('fName', 'First name is required.').not().isEmpty(), 
+    check('email', 'Please include valid email.').isEmail(), 
+    check('billingAddr', 'Please include valid billing address.').not().isEmpty(), 
+    check('password', 'Please enter a password with at least 6 characters.').isLength({ min: 6})
 ], 
     async (req, res) => {
-        console.log("register made it to the api!")
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log("errors in reg api: " + errors)
             return res.status(400).json({ errors: errors.array()})
         }
-        const { name, email, password, } = req.body;
-        console.log("req: " + req)
-        console.log("res: " + res)
+        const { fName, lName, profile, mailingAddr, billingAddr, email, password, } = req.body;
         try {
             let user = await User.findOne({ email })
             if (user) {
                 return res.status(400).json({ msg: 'user already exists'});
             }
             user = User({
-                name,
+                fName,
+                lName, 
+                profile,
+                billingAddr,
+                mailingAddr,
                 email,
                 password
             })

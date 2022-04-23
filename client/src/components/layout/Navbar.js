@@ -56,13 +56,11 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
         if (auth.isAuthenticated || !auth.user) getUser();
         renderNav();
     }, [auth.isAuthenticated])  
-    console.log("navbar auth: " + auth.isAuthenticated)
-    console.log("navbar user: " + auth.user)
 
     return (
         <div className='navbar bg-primary'>
-            <h1>License Manager{' '}Icon</h1>
-            <h2>{user && "Hello " + user.name.charAt(0).toUpperCase() + user.name.slice(1)}</h2> 
+            <h1 className='text-light'>License Manager</h1>
+            <h2 style={{paddingRight: '2rem'}}>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
             <ul>
                 {renderNav()}
             </ul>

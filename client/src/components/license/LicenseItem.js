@@ -21,7 +21,7 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
                 className={'badge ' + (licenseItem.type === 'professional' ? 'badge-success' : 'badge-primary')}>{licenseItem.type ? licenseItem.type.charAt(0).toUpperCase() + licenseItem.type.slice(1) : ""}
                </span>
            </h3> 
-           <ul className="list">
+           <ul className="list text-primary">
                {licenseItem.name && 
                (<li>
                     {licenseItem.name}

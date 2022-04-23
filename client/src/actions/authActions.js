@@ -36,6 +36,7 @@ export const register = (formData) => async dispatch => {
         });
         loadUser();
     } catch (err) {
+        console.log("register fail")
         dispatch({
             type: REGISTER_FAIL,
             payload: err.response.data.msg

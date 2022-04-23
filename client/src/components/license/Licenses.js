@@ -3,7 +3,6 @@ import { getLicenses } from '../../actions/licenseActions'
 import { connect } from 'react-redux';
 import LicenseItem from '../license/LicenseItem';
 
-import { CSSTransition, TransitionGroup} from 'react-transition-group';
 const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
     const [licenseList, setLicenseList] = useState([]);
     const getAllLicenses = async () => {
@@ -19,33 +18,19 @@ const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
     }
 
     return (
-            <>
+            <div className='grid-4 container flex-container'>
               {license.licenses !== null && !auth.loading ? (
-              <TransitionGroup>
-                {license.filtered !== null
+                license.filtered !== null
                   ? license.filtered.map(license => (
-                      <CSSTransition
-                        key={license._id}
-                        timeout={500}
-                        classNames='item'
-                      >
-                        <LicenseItem setAction={setAction} action={action} licenseItem={license} />
-                      </CSSTransition>
+                        <LicenseItem key={license._id} setAction={setAction} action={action} licenseItem={license} />
                     ))
                   : license.licenses.map(license=> (
-                      <CSSTransition
-                        key={license._id}
-                        timeout={500}
-                        classNames='item'
-                      >
-                        <LicenseItem  setAction={setAction} action={action} licenseItem={license} />
-                      </CSSTransition>
-                    ))}
-              </TransitionGroup>
+                        <LicenseItem key={license._id} setAction={setAction} action={action} licenseItem={license} />
+                    ))
             ) : (
-              <div></div>
+              <></>
             )}
-          </>
+          </div>
     )
 }
 
