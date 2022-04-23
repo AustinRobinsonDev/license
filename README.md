@@ -7,5 +7,6 @@
 * All the user and license data is saved to mongoDB atlas
 * Page routing is handled with react-router-dom v6 
 * Uses JWT authentication and bcrypt for password hashing
+* PrivateRoute for auth routes and config for global variables
 
 ### In main directory run "npm run dev" to run client on port:3000 and server on port:5000
