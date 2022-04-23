@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addLicense, updateLicense, clearCurrent } from '../../actions/licenseActions'
-const LicenseForm = ({addLicense, updateLicense, license}) => {
+const LicenseForm = ({addLicense, updateLicense, license, clearCurrent, setAction, action}) => {
     const [license2, setLicense2] = useState({
         name: '',
         email: '',
@@ -15,31 +15,33 @@ const LicenseForm = ({addLicense, updateLicense, license}) => {
     useEffect(() => {
         if(license.current !== null) {
             setLicense2(license.current);
-            console.log(license.current);
-        } else {
-            setLicense2({        
-                name: '',
-                email: '',
-                phone: '',
-                type: ''
-            })
-        }
-    }, [license]);
-
-    const onSubmit = e => {
-        e.preventDefault(); 
-        if(license.current === null){
-            addLicense(license);
-
-        } else {
-            updateLicense(license);
         } 
-        clearAll();
-    };
-
+    }, [ setLicense2, action]);
     const clearAll = () => {
         clearCurrent();
+        setLicense2({        
+            name: '',
+            email: '',
+            phone: '',
+            type: ''
+        })
     }
+
+    const onSubmit = async e => {
+        e.preventDefault(); 
+        if(license.current === null){
+            setAction('added');
+            await addLicense(license2);
+            clearAll();
+            setAction('clear added');
+        } else {
+            setAction('updated');
+            await updateLicense(license2);
+            clearAll()
+            setAction('clear updated');
+        } 
+
+    };
 
     return (
         <form onSubmit={onSubmit}>
@@ -54,7 +56,7 @@ const LicenseForm = ({addLicense, updateLicense, license}) => {
             </div>
             {license.current && 
                 <div>
-                    <button className="btn btn-light btn-block" onClick={clearAll}>Clear</button>
+                    <button className="btn btn-light btn-block" onClick={() => clearAll()}>Clear</button>
                 </div>
             }
         </form>

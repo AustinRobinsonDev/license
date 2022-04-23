@@ -22,11 +22,10 @@ export const getLicenses = () => async dispatch => {
         } catch (err) {
             dispatch({
                 type: LICENSE_ERROR,
-                payload: err.response.data
+                payload: err.message
             })
         }
 }
-
 export const addLicense = (license) => async dispatch => {
     try {
         const config = {
@@ -43,27 +42,25 @@ export const addLicense = (license) => async dispatch => {
     } catch (err) {
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.response.data
+            payload: err.message
         })
     }
 }
-
 export const deleteLicense = (id) => async dispatch => {
     try {
         setLoading();
-        await axios.delete(`/api/waypoints/${id}`);
+        await axios.delete(`/api/licenses/${id}`);
         dispatch({
             type: DELETE_LICENSE,
             payload: id
         });
-    } catch (err) {
+    } catch (err) { 
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.response.data
+            payload: err.message
         })
     }
 }
-
 export const updateLicense = (license) => async dispatch => {
     const config = {
         headers: {
@@ -80,44 +77,46 @@ export const updateLicense = (license) => async dispatch => {
     } catch (err) {
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.response.data
+            payload: err.res.data
         })
     }
 }
-
 export const filterLicenses = (text) => async dispatch => {
-    dispatch({
-        type: FILTER_LICENSES,
-        payload: text
-    });   
-}
+    try {
+        dispatch({
+            type: FILTER_LICENSES,
+            payload: text
+        });   
+    } catch (err) {
+        dispatch({
+            type: LICENSE_ERROR,
+            payload: err.res.data
+        })
+    }
 
+}
 export const setCurrent = (license) => async dispatch => {
     dispatch({
         type: SET_CURRENT,
         payload: license
     });   
 }
-
 export const clearCurrent = (text) => async dispatch => {
     dispatch({
         type: CLEAR_CURRENT,
         payload: text
     });
 }
-
 export const clearLicense = () => async dispatch => {
     dispatch({
         type: CLEAR_LICENSE
     });
 }
-
 export const clearFilter = () => async dispatch => {
     dispatch({
         type: CLEAR_FILTER
     });
 }
-
 export const setLoading = () => {
     return {
         type: SET_LOADING

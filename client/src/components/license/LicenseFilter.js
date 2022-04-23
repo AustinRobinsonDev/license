@@ -2,10 +2,10 @@ import React, {useRef, useEffect } from 'react';
 import { clearFilter, filterLicenses } from '../../actions/licenseActions'
 import { connect } from 'react-redux';
 
-const LicenseFilter = ({clearFilter, filterLicenses, license: {filtered}}) => {
+const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
     const text = useRef('');
     useEffect(() => {
-        if (filtered === null) {
+        if (license.filtered === null) {
             text.current.value = ''
         }
     })

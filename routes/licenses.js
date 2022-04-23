@@ -84,7 +84,7 @@ router.put('/:id', auth, async (req, res) => {
 // @acess   Private
 router.delete('/:id', auth, async (req, res) => {
     try {
-        let license = await Contact.findById(req.params.id);
+        let license = await License.findById(req.params.id);
         if(!license) return res.status(404).json({ msg: 'License not found'});
         if (license.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized'});

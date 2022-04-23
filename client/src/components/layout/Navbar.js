@@ -13,7 +13,7 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
     }
     const authLinks = (
         <>
-            <li>Hello {user && user.name}</li> 
+            <li>Hello {user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}</li> 
             <li>
                 <a onClick={onLogout} href="#!">
                     <span className="hide-sm">Logout</span>

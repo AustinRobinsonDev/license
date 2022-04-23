@@ -3,19 +3,27 @@ import LicenseFilter from '../components/license/LicenseFilter';
 import Licenses from '../components/license/Licenses';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions/authActions';
-import {useEffect} from 'react'
+import { getLicenses } from '../actions/licenseActions';
+import {useEffect, useState} from 'react'
 const Home = ({auth, loadUser}) => {
+    const [action, setAction] = useState('list')
     useEffect(() => {
         if (auth.isAuthenticated) loadUser();
-    }, [auth.isAuthenticated])  
+        getLicenses();
+        //eslint-disable-next-line
+    }, [action])  
     return (
         <div className='grid-2'>
             <div>
-                <LicenseForm />
+                <LicenseForm 
+                action={action}
+                setAction={setAction} />
             </div>
             <div>
                 <LicenseFilter />
-                <Licenses />
+                <Licenses 
+                action={action}
+                setAction={setAction} />
             </div>
         </div>
     )

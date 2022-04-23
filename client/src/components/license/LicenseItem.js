@@ -1,45 +1,43 @@
 import PropTypes from 'prop-types';
 import { deleteLicense, clearCurrent, setCurrent } from '../../actions/licenseActions'
 import { connect } from 'react-redux';
-
-const LicenseItem = (props, { licenses: { current }}) => {
-    const { _id, name, email, phone, type} = props.license;
-
-    const onDelete = () => {
-        deleteLicense(_id);
+const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licenseItem }) => {
+    const onDelete = async () => {
+        setAction('delete');
+        await deleteLicense(licenseItem._id);
         clearCurrent();
+        setAction('clear delete');
     }
     const onEdit = () => {
-        if (current !== null) {
-            console.log('item', current)
-        }
+        setCurrent(licenseItem);
+        setAction('edit');
     }
 
     return (
         <div className="card bg-light">
            <h3 className="text-primary text-left">
-               {name}{' '} 
+               {licenseItem.name}{' '} 
                <span style={{ float: 'right'}}
-                className={'badge ' + (type === 'professional' ? 'badge-success' : 'badge-primary')}>{type.charAt(0).toUpperCase() + type.slice(1)}
+                className={'badge ' + (licenseItem.type === 'professional' ? 'badge-success' : 'badge-primary')}>{licenseItem.type ? licenseItem.type.charAt(0).toUpperCase() + licenseItem.type.slice(1) : ""}
                </span>
            </h3> 
            <ul className="list">
-               {name && (<li>
-                    {name}
+               {licenseItem.name && 
+               (<li>
+                    {licenseItem.name}
                </li>)}
-               {email && (<li>
-                    {email}
+               {licenseItem.email && 
+               (<li>
+                    {licenseItem.email}
                </li>)}
-               {phone && (<li>
-                    {phone}
+               {licenseItem.phone && 
+               (<li>
+                    {licenseItem.phone}
                </li>)}
            </ul>
            <p>
-               <button className='btn btn-dark btn-sm' onClick={() => {
-                   setCurrent(props.license);
-                    onEdit();
-                   }}>Edit</button>
-               <button className='btn btn-danger btn-sm' onClick={onDelete}>Delete</button>
+               <button className='btn btn-dark btn-sm' onClick={() => onEdit()}>Edit</button>
+               <button name='delete' className='btn btn-danger btn-sm' onClick={() => onDelete()}>Delete</button>
            </p>
         </div>
     )
@@ -50,7 +48,7 @@ LicenseItem.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    licenses: state.licenses
+    license: state.license
   });
 
 export default connect(mapStateToProps, { deleteLicense, clearCurrent, setCurrent, })(LicenseItem);
