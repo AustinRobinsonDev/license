@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addLicense, updateLicense, clearCurrent } from '../../actions/licenseActions'
-const LicenseForm = ({addLicense, updateLicense, license, clearCurrent, setAction, action}) => {
+import { addLicense, updateLicense, clearCurrent } from '../../actions/licenseActions';
+const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setAction, action }) => {
     const [license2, setLicense2] = useState({
         name: '',
         email: '',
@@ -40,26 +40,37 @@ const LicenseForm = ({addLicense, updateLicense, license, clearCurrent, setActio
             clearAll()
             setAction('clear updated');
         } 
-
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            <h2 className='text-primary'>{license.current ? 'Edit License' : 'Add New License'}</h2>
-            <input type="text" placeholder="name" name="name" value={name} onChange={onChange}/>
-            <input type="text" placeholder="email" name="email" value={email} onChange={onChange}/>
-            <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange}/>
-            <input type="text" placeholder="type" name="type" value={type} onChange={onChange}/>
-            <h5>License Type</h5>
+        <>
+        <h2 className='text-primary text-center'>{license.current ? 'Edit License' : 'Add New License'}</h2>
+
+        <form className='grid-2' onSubmit={onSubmit}>
+            <div className='p-2'>
+                <input type="text" placeholder="name" name="name" value={name} onChange={onChange}/>
+                <input type="text" placeholder="email" name="email" value={email} onChange={onChange}/>
+                <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange}/>
+                <input type="text" placeholder="type" name="type" value={type} onChange={onChange}/>
+                <h5>License Type</h5>
+            </div>
+            <div className='p-2'>
+                <input type="text" placeholder="name" name="name" value={name} onChange={onChange}/>
+                <input type="text" placeholder="email" name="email" value={email} onChange={onChange}/>
+                <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange}/>
+                <input type="text" placeholder="type" name="type" value={type} onChange={onChange}/>
+                <h5>License Type</h5>
+            </div>
             <div>
                 <input type="submit" value={license.current ? 'Update' : 'Add License'} className="btn btn-primary btn-block"/>
             </div>
             {license.current && 
                 <div>
-                    <button className="btn btn-light btn-block" onClick={() => clearAll()}>Clear</button>
+                    <button style={{color: 'white'}}className="text-white btn btn-light btn-test btn-block" onClick={() => clearAll()}>Clear</button>
                 </div>
             }
         </form>
+    </>
     )
 }
 

@@ -2,9 +2,9 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #003699;
+  --primary-color: #799bdb;
   --dark-color: #333333;
-  --light-color: #f4f4f4;
+  --light-color: #83473c;
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -19,7 +19,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: rgb(210, 212, 180);
   color: #333;
 }
 
@@ -48,6 +48,15 @@ img {
   padding: 0;
 }
 
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-white{
+  color: white;
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -74,6 +83,11 @@ img {
   color: var(--primary-color);
 }
 
+.text-light {
+  color: var(--light-color);
+}
+
+
 .text-dark {
   color: var(--dark-color);
 }
@@ -95,6 +109,7 @@ img {
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
+  border-radius: 5px;
 }
 
 /* List */
@@ -179,13 +194,13 @@ img {
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  grid-gap: 3rem;
 }
 
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 1rem;
 }
 
 .grid-2-3 {
@@ -197,7 +212,7 @@ img {
 .btn {
   display: inline-block;
   background: var(--light-color);
-  color: #333;
+
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -304,6 +319,10 @@ img {
   border-radius: 50%;
 }
 
+.border-thin {
+  border: 1px solid rgb(61, 61, 61);
+}
+
 /* Forms */
 input {
   margin: 1.2rem 0;
@@ -328,6 +347,11 @@ textarea {
   border: 1px solid #ccc;
 }
 
+.btn-test {
+  padding: 0.4rem;
+  margin: 1.2rem 0
+}
+
 input[type='submit'],
 button {
   font: inherit;
@@ -342,17 +366,17 @@ button {
 }
 
 .form-container {
-  max-width: 500px;
-  margin: 2rem auto;
+  max-width: 600px;
+  margin: 0 auto;
   overflow: hidden;
-  padding: 0 2rem;
+  padding: 2rem 2rem;
 }
 
-.form-container h1,
+/* .form-container h1,
 h2,
 h3 {
   text-align: center;
-}
+} */
 
 table th,
 table td {
@@ -374,7 +398,7 @@ table th {
   width: 100%;
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
-  height: 75px;
+  height: 7rem;
   margin-bottom: 1rem;
 }
 

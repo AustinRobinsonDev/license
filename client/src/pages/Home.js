@@ -1,6 +1,7 @@
 import LicenseForm from '../components/license/LicenseForm';
 import LicenseFilter from '../components/license/LicenseFilter';
 import Licenses from '../components/license/Licenses';
+import Profile from '../components/auth/Profile';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions/authActions';
 import { getLicenses } from '../actions/licenseActions';
@@ -14,21 +15,18 @@ const Home = ({auth, loadUser}) => {
     }, [action])  
     return (
         <>
-            <div className='grid-2 px-3'>
+            <div className='container px-3'>
                 <div>
                     <LicenseForm 
                     action={action}
                     setAction={setAction} />
                 </div>
-                <div>
-                    <LicenseFilter />
+            </div>
+            <div className='px-3'>
+            <LicenseFilter />
                     <Licenses 
                     action={action}
                     setAction={setAction} />
-                </div>
-            </div>
-            <div>
-
             </div>
         </>
     )

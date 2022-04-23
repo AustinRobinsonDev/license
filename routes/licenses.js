@@ -8,9 +8,9 @@ const router = express.Router();
 
 const User = require('../models/User');
 const License = require('../models/License');
-// @route   GET api/licenses
-// @desc    Get the users licenses
-// @acess   Private
+// GET api/licenses
+// Get the users licenses
+// Private
 router.get('/', auth, async (req, res) => {
    try {
        const licenses = await License.find({ user: req.user.id}).sort({ date: -1 });
@@ -20,9 +20,9 @@ router.get('/', auth, async (req, res) => {
    }
 });
 
-// @route   POST api/licenses
-// @desc    Add license
-// @acess   Private
+// POST api/licenses
+// Add license
+// Private
 router.post('/',    
 [
     auth, [ check('name', 'name is required').not().isEmpty() ]
@@ -52,9 +52,9 @@ async (req, res) => {
 
 });
 
-// @route   PUT api/licenses/:id
-// @desc    Update license
-// @acess   Private
+// PUT api/licenses/:id
+// Update license
+// Private
 router.put('/:id', auth, async (req, res) => {
     const {name, email, phone, type} = req.body;
     // license object
@@ -79,9 +79,9 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
-// @route   DELETE api/license/:id
-// @desc    Delete license
-// @acess   Private
+// DELETE api/license/:id
+// Delete license
+// Private
 router.delete('/:id', auth, async (req, res) => {
     try {
         let license = await License.findById(req.params.id);
