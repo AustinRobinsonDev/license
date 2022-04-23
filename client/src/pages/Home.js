@@ -13,6 +13,7 @@ const Home = ({auth, loadUser}) => {
         getLicenses();
         //eslint-disable-next-line
     }, [action])  
+    console.log(action)
     return (
         <>
             <div className='container px-3'>
@@ -22,6 +23,7 @@ const Home = ({auth, loadUser}) => {
                     setAction={setAction} />
                 </div>
             </div>
+            <hr className='m-2'/>
             <div className='px-3'>
             <LicenseFilter />
                     <Licenses 

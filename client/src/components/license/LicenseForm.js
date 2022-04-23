@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import variables from '../../api/variables'
 import { addLicense, updateLicense, clearCurrent } from '../../actions/licenseActions';
 const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setAction, action }) => {
     const [license2, setLicense2] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        type: ''
+        title: '',
+        hasDocuments: null, 
+        contactFirstName: '',
+        contactLastName: '',
+        emailPrimary: '',
+        phonePrimary: '',
+        type: '',
+        state: ''
     });
-    const { name, email, phone, type} = license2;
+    const [states, setStates] = useState(["Alabama", "Georgia", "Mississippi", "Florida", "North Carolina"]);
+    const { title, hasDocuments, contactFirstName, contactLastName, emailPrimary, phonePrimary, type, state} = license2;
     const onChange = e => {
         setLicense2({ ...license2, [e.target.name]: e.target.value});
     }
@@ -20,13 +26,18 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
     const clearAll = () => {
         clearCurrent();
         setLicense2({        
-            name: '',
-            email: '',
-            phone: '',
-            type: ''
+            title: '',
+            hasDocuments: false, 
+            contactFirstName: '',
+            contactLastName: '',
+            emailPrimary: '',
+            phonePrimary: '',
+            type: '',
+            state: ''
         })
     }
 
+    
     const onSubmit = async e => {
         e.preventDefault(); 
         if(license.current === null){
@@ -48,18 +59,54 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
 
         <form className='grid-2' onSubmit={onSubmit}>
             <div className='p-2'>
-                <input type="text" placeholder="name" name="name" value={name} onChange={onChange}/>
-                <input type="text" placeholder="email" name="email" value={email} onChange={onChange}/>
-                <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange}/>
-                <input type="text" placeholder="type" name="type" value={type} onChange={onChange}/>
-                <h5>License Type</h5>
+                <input type="text" required placeholder="License title" name="title" value={title} onChange={onChange}/>
+                <input type="text" placeholder="First Name" name="contactFirstName" value={contactFirstName} onChange={onChange}/>
+                <input type="text" placeholder="Last Name" name="contactLastName" value={contactLastName} onChange={onChange}/>
+                <input type="text" placeholder="Email address" name="emailPrimary" value={emailPrimary} onChange={onChange}/>
+                <input type="text" placeholder="Phone Number" name="phonePrimary" value={phonePrimary} onChange={onChange}/>
             </div>
             <div className='p-2'>
-                <input type="text" placeholder="name" name="name" value={name} onChange={onChange}/>
-                <input type="text" placeholder="email" name="email" value={email} onChange={onChange}/>
-                <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange}/>
-                <input type="text" placeholder="type" name="type" value={type} onChange={onChange}/>
-                <h5>License Type</h5>
+                <h3 className='py-1'>State Issued</h3>
+                <select style={{marginBottom: '1rem'}} placeholder="State" name="state" value={state} onChange={onChange}>
+                    <option value={states[0]}>{states[0]}</option>
+                    <option value={states[1]}>{states[1]}</option>
+                    <option value={states[2]}>{states[2]}</option>
+                    <option value={states[3]}>{states[3]}</option>
+                    <option value={states[4]}>{states[4]}</option>
+                </select>
+                <h3>Type</h3>
+                <div className=''>
+                <label style={{ fontSize: '17px'}}>
+                Corp{" "}
+                    <input type="radio" name="type" value='Corp' onChange={onChange} checked={type ==='Corp'}/>
+                </label>
+                <label style={{ fontSize: '17px'}}>
+                   {" "} LLC{" "}
+                    <input type="radio" name="type" value='LLC' onChange={onChange} checked={type ==='LLC'}/>
+                </label>
+                <label style={{ fontSize: '17px'}}>
+                  {""}  Non-Profit{" "}
+                    <input type="radio" name="type" value='Non-Profit' onChange={onChange} checked={type ==='Non-Profit'}/>
+
+                </label>
+                </div>
+
+                <h3>Has Documents</h3>
+                <label style={{ fontSize: '17px'}}>
+                    Yes{" "}
+                    <input type="radio" name="hasDocuments" value='true' onChange={onChange} checked={hasDocuments==='true'} />
+                </label>
+                <label style={{ fontSize: '17px'}}>
+                    {" "}No{" "}
+                    <input type="radio" name="hasDocuments" value='false'onChange={onChange} checked={hasDocuments==='false'}/>
+                </label>
+                <br />
+                <label>
+                    Documents:  {" "}
+                    <input type='file' />(not functional)
+                </label>
+
+                
             </div>
             <div>
                 <input type="submit" value={license.current ? 'Update' : 'Add License'} className="btn btn-primary btn-block"/>

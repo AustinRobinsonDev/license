@@ -90,7 +90,7 @@ export const filterLicenses = (text) => async dispatch => {
     } catch (err) {
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.res.data
+            payload: err.message
         })
     }
 

@@ -14,7 +14,7 @@ const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
         //eslint-disable-next-line
     },[action])
     if (license.licenses !== null && license.licenses.length === 0 && !auth.loading){
-        return <h4>Please add a contact</h4>
+        return <h4 className='my-2'>Please add a license</h4>
     }
 
     return (

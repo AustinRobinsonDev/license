@@ -8,7 +8,7 @@ const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
         if (license.filtered === null) {
             text.current.value = ''
         }
-    })
+    },[license])
     const onChange = e => {
         if(text.current.value !== '') {
             filterLicenses(e.target.value);
@@ -18,7 +18,7 @@ const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
     }
     return (
         <form>
-            <input ref={text}type="text" placeholder="filter licenses" onChange={onChange}/>
+            <input ref={text} type="text" placeholder="filter licenses" onChange={onChange}/>
         </form>
     )
 }

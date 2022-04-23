@@ -8,31 +8,38 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
         clearCurrent();
         setAction('clear delete');
     }
-    const onEdit = () => {
-        setCurrent(licenseItem);
-        setAction('edit');
+    const onEdit = async () => {
+        setAction('setting current')
+        await setCurrent(licenseItem);
+        setAction('current set');
     }
 
     return (
         <div className="card bg-light">
            <h3 className="text-primary text-left">
-               {licenseItem.name}{' '} 
+               {licenseItem.title}{' '} 
                <span style={{ float: 'right'}}
-                className={'badge ' + (licenseItem.type === 'professional' ? 'badge-success' : 'badge-primary')}>{licenseItem.type ? licenseItem.type.charAt(0).toUpperCase() + licenseItem.type.slice(1) : ""}
+                className={'badge ' + (licenseItem.type === 'Corp' ? 'badge-success' : 'badge-primary')}>{licenseItem.type && licenseItem.type.charAt(0).toUpperCase() + licenseItem.type.slice(1)}
                </span>
            </h3> 
            <ul className="list text-primary">
-               {licenseItem.name && 
+               {licenseItem.contactFirstName && 
                (<li>
-                    {licenseItem.name}
+                    {licenseItem.contactFirstName}{" "}{licenseItem.contactLastName ? licenseItem.contactLastName : ""}
                </li>)}
-               {licenseItem.email && 
+               {licenseItem.phonePrimary && 
                (<li>
-                    {licenseItem.email}
+                    {licenseItem.phonePrimary}
                </li>)}
-               {licenseItem.phone && 
+               {licenseItem.emailPrimary && 
                (<li>
-                    {licenseItem.phone}
+                    {licenseItem.emailPrimary}
+               </li>)}
+               {licenseItem.hasDocuments ? 
+               (<li>
+                    <p>Has Documents: Yes</p>
+               </li>) : (<li>
+                    <p>Has Documents: No</p>
                </li>)}
            </ul>
            <p>

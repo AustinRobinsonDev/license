@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
                 ...state,
                 filtered: state.licenses.filter(license => {
                     const regex = new RegExp(`${action.payload}`, 'gi');
-                    return license.name.match(regex) || license.email.match(regex)
+                    return license.contactFirstName.match(regex) || license.emailPrimary.match(regex) || license.title.match(regex);
                 })
             }
         case CLEAR_FILTER:
