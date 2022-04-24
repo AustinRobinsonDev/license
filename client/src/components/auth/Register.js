@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alertActions';
-import { clearErrors, register, login } from '../../actions/authActions';
+import { setAlert } from '../../store/actions/alertActions';
+import { clearErrors, register } from '../../store/actions/authActions';
 import { useNavigate } from "react-router-dom";
 
 const Register = ({ auth, setAlert, clearErrors, register}) => {

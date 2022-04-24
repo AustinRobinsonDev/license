@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import { connect } from 'react-redux';
-import { loadUser } from '../../actions/authActions';
+import { loadUser } from '../../store/actions/authActions';
 
 const Profile = ({auth, loadUser}) => {
     console.log('profile auth: ', JSON.stringify(auth))

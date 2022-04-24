@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import variables from '../../api/variables'
-import { addLicense, updateLicense, clearCurrent } from '../../actions/licenseActions';
+import { addLicense, updateLicense, clearCurrent } from '../../store/actions/licenseActions';
 const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setAction, action }) => {
     const [license2, setLicense2] = useState({
         title: '',

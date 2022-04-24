@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getLicenses } from '../../actions/licenseActions'
+import { getLicenses } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 import LicenseItem from '../license/LicenseItem';
 

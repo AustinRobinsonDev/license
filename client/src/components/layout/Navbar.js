@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
-import { logout, loadUser } from '../../actions/authActions';
-import {clearLicense} from '../../actions/licenseActions';
+import { logout, loadUser } from '../../store/actions/authActions';
+import {clearLicense} from '../../store/actions/licenseActions';
 import {useEffect} from 'react'
 const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
     const getUser = () => loadUser();

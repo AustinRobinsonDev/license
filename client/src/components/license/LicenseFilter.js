@@ -1,5 +1,5 @@
 import React, {useRef, useEffect } from 'react';
-import { clearFilter, filterLicenses } from '../../actions/licenseActions'
+import { clearFilter, filterLicenses } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 
 const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
