@@ -4,7 +4,7 @@
 :root {
   --primary-color: #799bdb;
   --dark-color: #333333;
-  --light-color: #83473c;
+  --light-color: #272727;
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -26,6 +26,10 @@ body {
 a {
   color: var(--primary-color);
   text-decoration: none;
+}
+
+label:hover {
+  cursor: pointer;
 }
 
 a:hover {
@@ -108,8 +112,9 @@ img {
 .card {
   padding: 1rem;
   border: #ccc 1px dotted;
-  margin: 0.7rem 0;
+  margin: 1rem 0;
   border-radius: 5px;
+  box-shadow: 0 2px 1px 1px rgba(53, 53, 53, 0.555);
 }
 
 /* List */
@@ -329,6 +334,7 @@ img {
 /* Forms */
 input {
   margin: 1.2rem 0;
+  border-radius: 5px;
 }
 
 .form-text {
@@ -353,6 +359,10 @@ textarea {
 .btn-test {
   padding: 0.4rem;
   margin: 1.2rem 0
+}
+
+input[type='radio'] {
+  margin-right: 20px
 }
 
 input[type='submit'],

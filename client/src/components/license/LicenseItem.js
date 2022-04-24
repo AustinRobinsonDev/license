@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 import { deleteLicense, clearCurrent, setCurrent } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licenseItem }) => {
@@ -9,6 +10,11 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
         setAction('clear delete');
     }
     const onEdit = async () => {
+        setAction('setting current')
+        await setCurrent(licenseItem);
+        setAction('current set');
+    }
+    const moreInfo = async () => {
         setAction('setting current')
         await setCurrent(licenseItem);
         setAction('current set');
@@ -45,7 +51,9 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
            <p>
                <button className='btn btn-dark btn-sm' onClick={() => onEdit()}>Edit</button>
                <button name='delete' className='btn btn-danger btn-sm' onClick={() => onDelete()}>Delete</button>
+               <Link className='btn btn-dark btn-sm' to='/profile' >More info</Link>
            </p>
+
         </div>
     )
 }
