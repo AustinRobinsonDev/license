@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import FontAwesome from 'react-fontawesome';
 import { logout, loadUser } from '../../store/actions/authActions';
 import {clearLicense} from '../../store/actions/licenseActions';
 import {useEffect} from 'react'
@@ -11,19 +10,13 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
         logout();
         clearLicense();
     }
-    // const fixName = () => {
-    //     let capNames = user.name.split(" ")
-    //     let newArray;
-    //     capNames.forEach(name => {
-    //        newArray.push(name.charAt(0).toUpperCase() + user.name.slice(1));
-    //     })
-    //   //  return newArray[0] + " " + newArray[1]
-
-    // }
     const authLinks = (
         <>
             <li>
                 <Link to='/'>Home</Link>
+            </li>
+            <li>
+                <Link to='/'>Profile</Link>
             </li>
             <li>
                 <Link to='/about'>About</Link>
@@ -60,7 +53,7 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
     return (
         <div className='navbar bg-primary'>
             <h1 className='text-light'>License Manager</h1>
-            <h2 style={{paddingRight: '2rem'}}>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
+            <h2 className='text-center'>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
             <ul>
                 {renderNav()}
             </ul>

@@ -18,7 +18,8 @@ const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
     }
     return (
         <form>
-            <input ref={text} type="text" placeholder="filter licenses" onChange={onChange}/>
+            <h3 className='text-center'>Filter Licenses</h3>
+                <input style={{maxWidth: '400px', margin: '0 auto'}} ref={text} type="text" placeholder="Type something..." onChange={onChange}/>
         </form>
     )
 }

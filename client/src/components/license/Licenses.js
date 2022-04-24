@@ -28,7 +28,7 @@ const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
                         <LicenseItem key={license._id} setAction={setAction} action={action} licenseItem={license} />
                     ))
             ) : (
-              <></>
+              <p></p>
             )}
           </div>
     )
