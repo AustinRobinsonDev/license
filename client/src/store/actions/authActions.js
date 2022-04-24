@@ -6,7 +6,7 @@ import {REGISTER_SUCCESS,
         LOGIN_FAIL,
         LOGOUT,
         CLEAR_ERRORS } from '../actions/types';
-import setAuthToken from '../utils/setAuthToken';
+import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
 export const loadUser = () => async dispatch => {
     setAuthToken(localStorage.token);

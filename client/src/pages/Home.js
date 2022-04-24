@@ -3,8 +3,8 @@ import LicenseFilter from '../components/license/LicenseFilter';
 import Licenses from '../components/license/Licenses';
 import Profile from '../components/auth/Profile';
 import { connect } from 'react-redux';
-import { loadUser } from '../actions/authActions';
-import { getLicenses } from '../actions/licenseActions';
+import { loadUser } from '../store/actions/authActions';
+import { getLicenses } from '../store/actions/licenseActions';
 import {useEffect, useState} from 'react'
 const Home = ({auth, loadUser}) => {
     const [action, setAction] = useState('list')

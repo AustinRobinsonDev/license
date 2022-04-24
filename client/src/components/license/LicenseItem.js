@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { deleteLicense, clearCurrent, setCurrent } from '../../actions/licenseActions'
+import { deleteLicense, clearCurrent, setCurrent } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licenseItem }) => {
     const onDelete = async () => {

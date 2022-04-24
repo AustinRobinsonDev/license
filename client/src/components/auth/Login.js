@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { login, clearErrors, loadUser } from '../../actions/authActions';
-import { setAlert } from '../../actions/alertActions';
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import { login, clearErrors } from '../../store/actions/authActions';
+import { setAlert } from '../../store/actions/alertActions';
+import { useNavigate } from "react-router-dom";
+
 const Login = ({auth, setAlert, login}) => {
-  const location = useLocation();
+
   let navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
