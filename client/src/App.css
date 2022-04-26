@@ -2,10 +2,10 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #799bdb;
+  --primary-color: #bdac9b;
   --dark-color: #333333;
-  --light-color: #272727;
-  --danger-color: #dc3545;
+  --light-color: #d6d6d6;
+  --danger-color: #fc2f43;
   --success-color: #28a745;
 }
 
@@ -19,8 +19,9 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: rgb(210, 212, 180);
+  background-color: rgb(218, 219, 208);
   color: #333;
+  min-height: 100vh;
 }
 
 a {
@@ -258,11 +259,13 @@ img {
 }
 
 .alert {
+  position: absolute ;
+  width: 200px;
   padding: 0.7rem;
   margin: 1rem 0;
   opacity: 0.9;
   background: var(--light-color);
-  color: #333;
+  color: rgb(0, 0, 0);
 }
 
 .btn-primary,

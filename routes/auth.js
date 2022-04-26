@@ -1,6 +1,5 @@
-const { decodeBase64 } = require('bcryptjs');
 const express = require('express')
-const {check, validationResult} = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -9,9 +8,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// @route   GET api/auth
-// @desc    Get logged in user
-// @acess   Private
+// GET api/auth, Get logged in user, Private
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -22,9 +19,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// @route   POST api/auth
-// @desc    Auth User & Get token
-// @acess   Public
+// POST api/auth, Auth User & Get token, Public
 router.post('/', 
 [   check('email', 'please include a valid email').isEmail(), 
     check('password', 'password is required').exists()

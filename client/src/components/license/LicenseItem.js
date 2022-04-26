@@ -21,7 +21,7 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
     }
 
     return (
-        <div className="card bg-light">
+        <div className="card bg-dark">
            <h3 className="text-primary text-left">
                {licenseItem.title}{' '} 
                <span style={{ float: 'right'}}
@@ -47,12 +47,14 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
                </li>) : (<li>
                     <p>Has Documents: No</p>
                </li>)}
-           </ul>
-           <p>
-               <button className='btn btn-dark btn-sm' onClick={() => onEdit()}>Edit</button>
-               <button name='delete' className='btn btn-danger btn-sm' onClick={() => onDelete()}>Delete</button>
-               <Link className='btn btn-dark btn-sm' to='/profile' >More info</Link>
-           </p>
+            </ul>
+            <div className='flex-container'>
+                <div>
+                        <button className='btn btn-dark btn-sm' onClick={() => onEdit()}>Edit</button>
+                        <button name='delete' className='btn btn-danger btn-sm' onClick={() => onDelete()}>Delete</button>
+                </div>
+                <Link className='btn btn-light btn-sm' to='/profile' >More info</Link>
+            </div>
 
         </div>
     )
