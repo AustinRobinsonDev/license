@@ -18,7 +18,7 @@ const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
     }
 
     return (
-            <div className='grid-4 container flex-container'>
+            <div style={{maxHeight: '500px', overflowY: 'scroll'}} className='grid-4 container flex-container'>
               {license.licenses !== null && !auth.loading ? (
                 license.filtered !== null
                   ? license.filtered.map(license => (

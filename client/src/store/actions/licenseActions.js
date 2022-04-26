@@ -22,7 +22,7 @@ export const getLicenses = () => async dispatch => {
         } catch (err) {
             dispatch({
                 type: LICENSE_ERROR,
-                payload: err.message
+                payload: err.response
             })
         }
 }
@@ -42,7 +42,7 @@ export const addLicense = (license) => async dispatch => {
     } catch (err) {
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.message
+            payload: err.response
         })
     }
 }
@@ -57,7 +57,7 @@ export const deleteLicense = (id) => async dispatch => {
     } catch (err) { 
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.message
+            payload: err.response
         })
     }
 }
@@ -77,7 +77,7 @@ export const updateLicense = (license) => async dispatch => {
     } catch (err) {
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.res.data
+            payload: err.response
         })
     }
 }
@@ -90,7 +90,7 @@ export const filterLicenses = (text) => async dispatch => {
     } catch (err) {
         dispatch({
             type: LICENSE_ERROR,
-            payload: err.message
+            payload: err.response
         })
     }
 
