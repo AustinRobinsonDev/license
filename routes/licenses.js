@@ -56,7 +56,9 @@ async (req, res) => {
 
 // PUT api/licenses/:id, Update license, Private
 router.put('/:id', auth, async (req, res) => {
-    const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrititle, type} = req.body;
+  
+    const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type} = req.body;
+    // license object
 
     const licenseFields = {};
     if(title) licenseFields.title = title;
