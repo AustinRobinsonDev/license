@@ -12,7 +12,7 @@ const Login = ({auth, setAlert, login}) => {
     password: ''
   });
   useEffect(() => {
-    if (auth.error === 'Invalid Credentials') {
+    if (auth.error === 'invalid credentials') {
       setAlert(auth.error, 'danger');
       clearErrors();
     }

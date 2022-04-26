@@ -1,6 +1,5 @@
-const {check, validationResult} = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
-
 const express = require('express');
 
 const router = express.Router();
@@ -43,9 +42,7 @@ async (req, res) => {
             type,
             user: req.user.id
         })
-        //saves to db
         const license = await newLicense.save();
-        // sends to client 
         res.json(license);
     } catch (err) {
         console.error(err.message);
@@ -56,9 +53,7 @@ async (req, res) => {
 
 // PUT api/licenses/:id, Update license, Private
 router.put('/:id', auth, async (req, res) => {
-  
     const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type} = req.body;
-    // license object
 
     const licenseFields = {};
     if(title) licenseFields.title = title;

@@ -106,12 +106,12 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
 
                 
             </div>
-            <div>
+            <div className='px-2'>
                 <input type="submit" value={license.current ? 'Update' : 'Add License'} className="btn btn-primary btn-block"/>
             </div>
             {license.current && 
-                <div>
-                    <button style={{color: 'white'}}className="text-white btn btn-light btn-test btn-block" onClick={() => clearAll()}>Clear</button>
+                <div className='px-2'>
+                    <button style={{color: 'white'}}className="text-white btn btn-dark btn-test btn-block" onClick={() => clearAll()}>Clear</button>
                 </div>
             }
         </form>

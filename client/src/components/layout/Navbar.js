@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout, loadUser } from '../../store/actions/authActions';
-import {clearLicense} from '../../store/actions/licenseActions';
-import {useEffect} from 'react'
+import { clearLicense } from '../../store/actions/licenseActions';
+import { useEffect } from 'react';
 const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
     const getUser = () => loadUser();
-    const {user} = auth;
+    const { user } = auth;
     const onLogout = () => {
         logout();
         clearLicense();
@@ -16,7 +16,7 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
                 <Link to='/'>Home</Link>
             </li>
             <li>
-                <Link to='/'>Profile</Link>
+                <Link to='/user'>Profile</Link>
             </li>
             <li>
                 <Link to='/about'>About</Link>
