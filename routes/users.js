@@ -6,9 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 const router = express.Router();
-// @route   POST api/users
-// @desc    Registers a new user
-// @access  Public
+// POST api/users, Registers a new user, Public
 router.post('/', 
 [
     check('fName', 'First name is required.').not().isEmpty(), 
