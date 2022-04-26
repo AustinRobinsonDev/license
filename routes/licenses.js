@@ -1,6 +1,5 @@
 const {check, validationResult} = require('express-validator');
 const auth = require('../middleware/auth');
-// CRUD for editing user DB entries 
 
 const express = require('express');
 
@@ -8,21 +7,18 @@ const router = express.Router();
 
 const User = require('../models/User');
 const License = require('../models/License');
-// GET api/licenses
-// Get the users licenses
-// Private
+// GET api/licenses, Get the users licenses, Private
 router.get('/', auth, async (req, res) => {
    try {
        const licenses = await License.find({ user: req.user.id}).sort({ date: -1 });
        res.json(licenses)
    } catch (err) {
+       console.error(err.message);
        res.status(500).send('server error');
    }
 });
 
-// POST api/licenses
-// Add license
-// Private
+// POST api/licenses, Add license, Private
 router.post('/',    
 [
     auth, [ check('title', 'title is required').not().isEmpty() ]
@@ -58,12 +54,10 @@ async (req, res) => {
 
 });
 
-// PUT api/licenses/:id
-// Update license
-// Private
+// PUT api/licenses/:id, Update license, Private
 router.put('/:id', auth, async (req, res) => {
     const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrititle, type} = req.body;
-    // license object
+
     const licenseFields = {};
     if(title) licenseFields.title = title;
     if(orderId) licenseFields.orderId = orderId;
@@ -91,9 +85,7 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
-// DELETE api/license/:id
-// Delete license
-// Private
+// DELETE api/license/:id, Delete license, Private
 router.delete('/:id', auth, async (req, res) => {
     try {
         let license = await License.findById(req.params.id);

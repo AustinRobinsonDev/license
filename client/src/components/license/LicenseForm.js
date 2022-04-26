@@ -80,13 +80,12 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
                     <input type="radio" name="type" value='Corp' onChange={onChange} checked={type ==='Corp'}/>
                 </label>
                 <label style={{ fontSize: '17px'}}>
-                   {" "} LLC{" "}
+                   LLC{" "}
                     <input type="radio" name="type" value='LLC' onChange={onChange} checked={type ==='LLC'}/>
                 </label>
                 <label style={{ fontSize: '17px'}}>
-                  {""}  Non-Profit{" "}
+                  Non-Profit{" "}
                     <input type="radio" name="type" value='Non-Profit' onChange={onChange} checked={type ==='Non-Profit'}/>
-
                 </label>
                 </div>
 
@@ -96,7 +95,7 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
                     <input type="radio" name="hasDocuments" value='true' onChange={onChange} checked={hasDocuments==='true'} />
                 </label>
                 <label style={{ fontSize: '17px'}}>
-                    {" "}No{" "}
+                    No{" "}
                     <input type="radio" name="hasDocuments" value='false'onChange={onChange} checked={hasDocuments==='false'}/>
                 </label>
                 <br />
