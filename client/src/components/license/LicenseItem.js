@@ -17,6 +17,7 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
     const moreInfo = async () => {
         setAction('setting current')
         await setCurrent(licenseItem);
+        localStorage.setItem('current', JSON.stringify(licenseItem))
         setAction('current set');
     }
 

@@ -9,7 +9,6 @@ const Home = ({ auth, loadUser, clearCurrent, license }) => {
     const [action, setAction] = useState('list');
     useEffect(() => {
         if (auth.isAuthenticated) loadUser();
-   //     clearCurrent();
         //eslint-disable-next-line
     }, [action])  
     return (

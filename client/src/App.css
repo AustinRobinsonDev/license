@@ -71,6 +71,11 @@ img {
   max-width: 600px;
 }
 
+.license-container{
+  margin: 20px auto 0;
+  max-width: 1000px;
+}
+
 .user-info {
   border-radius: 10px;
   padding: 2rem;

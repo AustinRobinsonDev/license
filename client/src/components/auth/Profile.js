@@ -11,6 +11,8 @@ const Profile = ({ auth, license }) => {
                 <img className='round-img img-sm' src={avatar} alt="" />
                 <h2 className='my-1'>{user && user.fName }{" "}{user && user.lName}</h2>
                 <h3 className='my-1'>Role: {user && user.profile}</h3>
+                {user.mailingAddr && <h4 className='my-1'>Mailing Address: {user.mailingAddr}</h4>}
+                {user.billingAddr && <h4 className='my-1'>Billing Address: {user.billingAddr}</h4>}
                 <h4 className='my-1'>Current number of licenses: { licenses.length }</h4>
             </section>
         </main>

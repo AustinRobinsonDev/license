@@ -81,7 +81,7 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
             </div>
             <div className='p-2'>
                 <select style={{marginBottom: '1rem'}} placeholder="State" name="state" value={state} onChange={onChange}>
-                    <option value="" selected>State that issued license</option>
+                    <option value="" defaultValue>State that issued license</option>
                     <option value={states[0]}>{states[0]}</option>
                     <option value={states[1]}>{states[1]}</option>
                     <option value={states[2]}>{states[2]}</option>
