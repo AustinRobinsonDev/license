@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout, loadUser } from '../../store/actions/authActions';
-import { clearLicense } from '../../store/actions/licenseActions';
+import { clearLicense, clearCurrent } from '../../store/actions/licenseActions';
 import { useEffect } from 'react';
-const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
+const Navbar = ({ auth, logout, clearLicense, loadUser, clearCurrent }) => {
     const getUser = () => loadUser();
     const { user } = auth;
     const onLogout = () => {
@@ -13,13 +13,13 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
     const authLinks = (
         <>
             <li>
-                <Link to='/'>Home</Link>
+                <Link to='/' onClick={() => clearCurrent()}>Home</Link>
             </li>
             <li>
-                <Link to='/user'>Profile</Link>
+                <Link to='/user' onClick={() => clearCurrent()}>Profile</Link>
             </li>
             <li>
-                <Link to='/about'>About</Link>
+                <Link to='/about' onClick={() => clearCurrent()}>About</Link>
             </li>
             <li>
                 <a onClick={onLogout} href="#!">
@@ -52,8 +52,8 @@ const Navbar = ({ auth, logout, clearLicense, loadUser }) => {
 
     return (
         <div className='navbar bg-primary'>
-            <h1 className='text-light'>License Manager</h1>
-            <h2 className='text-center'>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
+            <h1 className='text-dark'>License Manager</h1>
+            <h2 className='text-center p-2'>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
             <ul>
                 {renderNav()}
             </ul>
@@ -65,4 +65,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout, clearLicense, loadUser })(Navbar);
+export default connect(mapStateToProps, { logout, clearLicense, loadUser, clearCurrent })(Navbar);

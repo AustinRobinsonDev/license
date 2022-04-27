@@ -4,7 +4,7 @@ import { deleteLicense, clearCurrent, setCurrent } from '../../store/actions/lic
 import { connect } from 'react-redux';
 const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licenseItem }) => {
     const onDelete = async () => {
-        setAction('delete');
+        setAction('deleting');
         await deleteLicense(licenseItem._id);
         clearCurrent();
         setAction('clear delete');
@@ -12,11 +12,12 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
     const onEdit = async () => {
         setAction('setting current')
         await setCurrent(licenseItem);
-        setAction('current set');
+        setAction('onEdit set');
     }
     const moreInfo = async () => {
         setAction('setting current')
         await setCurrent(licenseItem);
+        localStorage.setItem('current', JSON.stringify(licenseItem))
         setAction('current set');
     }
 
@@ -53,7 +54,7 @@ const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licens
                         <button className='btn btn-dark btn-sm' onClick={() => onEdit()}>Edit</button>
                         <button name='delete' className='btn btn-danger btn-sm' onClick={() => onDelete()}>Delete</button>
                 </div>
-                <Link className='btn btn-light btn-sm' to='/profile' >More info</Link>
+                <Link className='btn btn-light btn-sm' to='/licenseDetails' onClick={() => moreInfo()} >More info</Link>
             </div>
 
         </div>

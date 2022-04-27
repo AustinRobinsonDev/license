@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addLicense, updateLicense, clearCurrent } from '../../store/actions/licenseActions';
 const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setAction, action }) => {
+    const [localLicense, setLocalLicense] = useState(license.current)
     const [license2, setLicense2] = useState({
         title: '',
         hasDocuments: null, 
@@ -18,10 +19,24 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
         setLicense2({ ...license2, [e.target.name]: e.target.value});
     }
     useEffect(() => {
+        setAction('formRendered')
+        setLocalLicense(license.current)
         if(license.current !== null) {
             setLicense2(license.current);
         } 
-    }, [ setLicense2, action]);
+        if (license.current === null) {
+            setLicense2({
+                title: '',
+                hasDocuments: false, 
+                contactFirstName: '',
+                contactLastName: '',
+                emailPrimary: '',
+                phonePrimary: '',
+                type: '',
+                state: ''
+            });
+        }
+    }, [action, localLicense]);
     const clearAll = () => {
         clearCurrent();
         setLicense2({        
@@ -66,7 +81,7 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
             </div>
             <div className='p-2'>
                 <select style={{marginBottom: '1rem'}} placeholder="State" name="state" value={state} onChange={onChange}>
-                    <option value="" selected>State that issued license</option>
+                    <option value="" defaultValue>State that issued license</option>
                     <option value={states[0]}>{states[0]}</option>
                     <option value={states[1]}>{states[1]}</option>
                     <option value={states[2]}>{states[2]}</option>

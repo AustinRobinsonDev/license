@@ -1,22 +1,27 @@
 import { connect } from 'react-redux';
 import { loadUser } from '../../store/actions/authActions';
-
-const Profile = ({ auth, loadUser }) => {
-    console.log('profile auth: ', JSON.stringify(auth))
+import avatar from '../layout/avatar.png'
+const Profile = ({ auth, license }) => {
     const { user } = auth;
+    const { licenses } = license;
     return (
-        <div className='px-2 py-2'>
-        <h1>This is the profile page</h1>
-            <h1 className='my-1 avatar '>Avatar</h1>
-            <h2 className='my-1'>{user && user.fName }{" "}{user && user.lName}</h2>
-            <h3 className='my-1'>{user && user.profile}</h3>
-            <h4 className='my-1'>Number of licenses by type?</h4>
-        </div>
+        <main className='px-2 py-2 user-container'>
+            <h1 className='text-center ul my-2'>User information</h1>
+            <section className='user-info'>
+                <img className='round-img img-sm' src={avatar} alt="" />
+                <h2 className='my-1'>{user && user.fName }{" "}{user && user.lName}</h2>
+                <h3 className='my-1'>Role: {user && user.profile}</h3>
+                {user.mailingAddr && <h4 className='my-1'>Mailing Address: {user.mailingAddr}</h4>}
+                {user.billingAddr && <h4 className='my-1'>Billing Address: {user.billingAddr}</h4>}
+                <h4 className='my-1'>Current number of licenses: { licenses.length }</h4>
+            </section>
+        </main>
     )
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    license: state.license
 });
 
 export default connect(mapStateToProps, { loadUser })(Profile)
