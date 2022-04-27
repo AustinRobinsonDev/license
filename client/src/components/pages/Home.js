@@ -5,12 +5,19 @@ import { connect } from 'react-redux';
 import { loadUser } from '../../store/actions/authActions';
 import { clearCurrent } from '../../store/actions/licenseActions';
 import { useEffect, useState } from 'react'
+import { loading } from '../layout/Loading';
+
 const Home = ({ auth, loadUser, clearCurrent, license }) => {
     const [action, setAction] = useState('list');
     useEffect(() => {
         if (auth.isAuthenticated) loadUser();
         //eslint-disable-next-line
     }, [action])  
+    if (auth.loading) {
+        return (
+            <div className='loading-container'>{loading()}</div>
+            );
+    }
     return (
         <>
             <div className='container px-3'>

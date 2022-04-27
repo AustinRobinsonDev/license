@@ -1,6 +1,6 @@
 import spinner from './spinner.gif';
 
-const Spinner = () => {
+export const loading = () => {
   return (
   <>
     <img
@@ -11,5 +11,3 @@ const Spinner = () => {
   </>
   )
   };
-
-export default Spinner

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getLicenses } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 import LicenseItem from '../license/LicenseItem';
-
+import { loading } from '../layout/Loading';
 const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
     const [licenseList, setLicenseList] = useState([]);
     const getAllLicenses = async () => {
@@ -14,7 +14,7 @@ const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
         //eslint-disable-next-line
     },[action])
     if (license.licenses !== null && license.licenses.length === 0 && !auth.loading){
-        return <h4 className='my-2'>Please add a license</h4>
+        return <h4 style={{marginBottom: '40px'}} className='my-2 text-center'>Please add a license</h4>
     }
 
     return (
@@ -32,6 +32,7 @@ const Licenses = ({ setAction, action, license, auth, getLicenses}) => {
             )}
           </div>
     )
+            
 }
 
 const mapStateToProps = state => ({

@@ -69,7 +69,7 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
 
     return (
         <>
-        <h2 className='text-primary text-center'>{license.current ? 'Edit License' : 'Add New License'}</h2>
+        <h2 className='text-primary text-center my-1'>{license.current ? 'Edit License' : 'Add New License'}</h2>
 
         <form className='grid-2' onSubmit={onSubmit}>
             <div className='p-2'>
