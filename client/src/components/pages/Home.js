@@ -1,9 +1,9 @@
-import LicenseForm from '../components/license/LicenseForm';
-import LicenseFilter from '../components/license/LicenseFilter';
-import Licenses from '../components/license/Licenses';
+import LicenseForm from '../license/LicenseForm';
+import LicenseFilter from '../license/LicenseFilter';
+import Licenses from '../license/Licenses';
 import { connect } from 'react-redux';
-import { loadUser } from '../store/actions/authActions';
-import { clearCurrent } from '../store/actions/licenseActions';
+import { loadUser } from '../../store/actions/authActions';
+import { clearCurrent } from '../../store/actions/licenseActions';
 import { useEffect, useState } from 'react'
 const Home = ({ auth, loadUser, clearCurrent, license }) => {
     const [action, setAction] = useState('list');
