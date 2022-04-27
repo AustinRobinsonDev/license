@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Home from './pages/Home';
 import Alerts from './components/layout/Alerts';
@@ -11,11 +11,12 @@ import setAuthToken from './utils/setAuthToken';
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Profile from './components/auth/Profile';
+import LicenseDetails from './components/license/LicenseDetails';
 
 if (localStorage.token){
   setAuthToken(localStorage.token)
-} 
-const App = ({auth}) => {
+}
+const App = ({ auth }) => {
   return (
     <div className='container'>
       <Router>
@@ -35,6 +36,13 @@ const App = ({auth}) => {
                 element={
                 <PrivateRoute auth={auth}>
                   <Profile />
+                </PrivateRoute>
+            }></Route>
+            <Route exact 
+                path='/licenseDetails' 
+                element={
+                <PrivateRoute auth={auth}>
+                  <LicenseDetails />
                 </PrivateRoute>
             }></Route>
             <Route exact path='/login' element={<Login />}/>
