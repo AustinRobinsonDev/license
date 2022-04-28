@@ -26,3 +26,5 @@
 - ~~Add Alert component to form~~
 - ~~Fix current state not clearing on back button in browser~~
 - Add dark mode
+- Add batch delete
+- Add sorting orders

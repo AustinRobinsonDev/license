@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { deleteLicense, clearCurrent, setCurrent } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
-const LicenseItem = ({setAction, deleteLicense, clearCurrent, setCurrent, licenseItem }) => {
+const LicenseItem = ({ setShowModal, setDeleteId, setAction, deleteLicense, clearCurrent, setCurrent, licenseItem }) => {
     const onDelete = async () => {
-        setAction('deleting');
-        await deleteLicense(licenseItem._id);
+        setShowModal(true);
+        setDeleteId(licenseItem._id);
         clearCurrent();
         setAction('clear delete');
     }
