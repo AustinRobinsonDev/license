@@ -27,8 +27,9 @@ async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()})
     }
-    const { title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type } = req.body;
+    const { title, image, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type } = req.body;
     try {
+        let imgData = new Buffer.from(image.split(",")[1],"base64")
         const newLicense = new License({
             title,
             orderId: Date.now(),
@@ -37,11 +38,13 @@ async (req, res) => {
             dateCreated: Date.now(),
             contactFirstName,
             contactLastName,
+            image:imgData,
             emailPrimary,
             phonePrimary,
             type,
             user: req.user.id
         })
+
         const license = await newLicense.save();
         res.json(license);
     } catch (err) {
@@ -53,7 +56,7 @@ async (req, res) => {
 
 // PUT api/licenses/:id, Update license, Private
 router.put('/:id', auth, async (req, res) => {
-    const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type} = req.body;
+    const {title, image, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type} = req.body;
 
     const licenseFields = {};
     if(title) licenseFields.title = title;
@@ -65,6 +68,7 @@ router.put('/:id', auth, async (req, res) => {
     if(contactLastName) licenseFields.contactLastName = contactLastName;
     if(emailPrimary) licenseFields.emailPrimary = emailPrimary;
     if(phonePrimary) licenseFields.phonePrimary = phonePrimary;
+    if(image) licenseFields.image = image;
     if(type) licenseFields.type = type;
     try {
         let license = await License.findById(req.params.id);

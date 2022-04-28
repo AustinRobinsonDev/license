@@ -5,6 +5,9 @@ const LicenseSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
+    image: {
+        type: Buffer
+    },
     title: {
         type: String,
         required: true

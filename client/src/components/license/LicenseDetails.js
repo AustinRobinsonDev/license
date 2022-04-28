@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getLicenses } from '../../store/actions/licenseActions';
+
 const LicenseDetails = ({ auth, license }) => {
-    const { user } = auth;
+    const { user, loading } = auth;
     const { current, licenses } = license;
     const [localCurrent, setLocalCurrent] = useState(localStorage.getItem('current'));
+    const [document, setDocument] = useState('');
+
+    const getDataFixImg = async () => {
+        console.log(localCurrent.image.data)
+        if (localCurrent.image.data) {
+            const base64String = btoa(String.fromCharCode(...new Uint8Array(localCurrent.image.data)))    
+            setDocument(base64String);
+        }
+        console.log("document after conversion: " + localCurrent.image.data)
+    }
     useEffect(() => {
         setLocalCurrent(current)
         getLicenses();
+        if(!loading){
+            getDataFixImg();
+        }
     }, [current])
     return (
         <main className='px-2 py-2 license-container'>
@@ -30,6 +44,8 @@ const LicenseDetails = ({ auth, license }) => {
                     <h4 className='my-1'>Email address: { localCurrent.emailPrimary }</h4>
                     <h4 className='my-1'>Phone number: { localCurrent.phonePrimary }</h4>
                 </div>
+                <h2>Documents: </h2>
+                <img src={`data:image/jpeg;base64,${document}`}/> 
             </section>
         </main>
     )
