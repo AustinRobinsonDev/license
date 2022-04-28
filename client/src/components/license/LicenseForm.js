@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { setAlert } from '../../store/actions/alertActions';
 import { addLicense, updateLicense, clearCurrent } from '../../store/actions/licenseActions';
-const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setAction, action }) => {
+const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurrent, setAction, action }) => {
     const [localLicense, setLocalLicense] = useState(license.current)
     const [license2, setLicense2] = useState({
         title: '',
@@ -58,7 +59,8 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
             setAction('added');
             await addLicense(license2);
             clearAll();
-            setAction('clear added');
+            setAction('License added');
+            setAlert("Added successfully", "success")
         } else {
             setAction('updated');
             await updateLicense(license2);
@@ -74,7 +76,7 @@ const LicenseForm = ({ addLicense, updateLicense, license, clearCurrent, setActi
         <form className='grid-2' onSubmit={onSubmit}>
             <div className='p-2'>
                 <input type="text" required placeholder="License title" name="title" value={title} onChange={onChange}/>
-                <input type="text" placeholder="First Name" name="contactFirstName" value={contactFirstName} onChange={onChange}/>
+                <input type="text" placeholder="First Name" name="contactFirstName" value={contactFirstName} onChange={onChange} required/>
                 <input type="text" placeholder="Last Name" name="contactLastName" value={contactLastName} onChange={onChange}/>
                 <input type="text" placeholder="Email address" name="emailPrimary" value={emailPrimary} onChange={onChange}/>
                 <input type="text" placeholder="Phone Number" name="phonePrimary" value={phonePrimary} onChange={onChange}/>
@@ -138,4 +140,4 @@ const mapStateToProps = state => ({
     license: state.license
 });
 
-export default connect(mapStateToProps, { addLicense, updateLicense, clearCurrent })(LicenseForm);
+export default connect(mapStateToProps, { addLicense, updateLicense, clearCurrent, setAlert })(LicenseForm);
