@@ -17,12 +17,12 @@
 ### Todo
 
 - Make "are you sure?" modal before license delete
-- Set up private route "profile" page
-- Set up private route "license details" page
+- ~~Set up private route "profile" page~~
+- ~~Set up private route "license details" page~~
 - Add document upload functionality with Buffer and base64 format
 - Increase amount of data in each license
 - Add tests
 - Fix "Has documents" field not populating on edit click
-- Add Alert component to form
-- Fix current state not clearing on back button in browser
+- ~~Add Alert component to form~~
+- ~~Fix current state not clearing on back button in browser~~
 - Add dark mode
