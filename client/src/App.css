@@ -144,11 +144,19 @@ img {
 
 /* Cards */
 .card {
+  max-height: 15rem;
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 1rem 0;
   border-radius: 5px;
   box-shadow: 0 2px 1px 1px rgba(53, 53, 53, 0.555);
+}
+
+.licenses-container {
+  max-height: 500px;
+  min-height: 500px;
+  overflow-y: scroll;
+  width: 100%;
 }
 
 /* List */

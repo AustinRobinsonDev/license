@@ -10,6 +10,9 @@ import { loading } from '../layout/Loading';
 const Home = ({ auth, loadUser, clearCurrent, license }) => {
     const [action, setAction] = useState('list');
     useEffect(() => {
+        window.onpopstate = () => {
+            clearCurrent();
+          }
         if (auth.isAuthenticated) loadUser();
         //eslint-disable-next-line
     }, [action])  
