@@ -16,7 +16,7 @@
 
 ### Todo
 
-- Make "are you sure?" modal before license delete
+- ~~Make "are you sure?" modal before license delete
 - ~~Set up private route "profile" page~~
 - ~~Set up private route "license details" page~~
 - Add document upload functionality with Buffer and base64 format
