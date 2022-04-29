@@ -12,7 +12,8 @@ import Register from './components/auth/Register';
 import Navbar from './components/layout/Navbar';
 import Profile from './components/pages/Profile';
 import LicenseDetails from './components/license/LicenseDetails';
-import NotFound from './components/pages/NotFound'
+import NotFound from './components/pages/NotFound';
+import Footer from './components/layout/Footer';
 
 if (localStorage.token){
   setAuthToken(localStorage.token)
@@ -51,6 +52,7 @@ const App = ({ auth }) => {
             <Route path='/register' element={<Register />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
+          <Footer />
         </Fragment>
       </Router>
     </div>
