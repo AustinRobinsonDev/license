@@ -2,7 +2,7 @@ import React, {useRef, useEffect } from 'react';
 import { clearFilter, filterLicenses } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 
-const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
+const LicenseFilter = ({setSelectMultiple, selectMultiple, clearFilter, filterLicenses, license}) => {
     const text = useRef('');
     useEffect(() => {
         if (license.filtered === null) {
@@ -16,11 +16,29 @@ const LicenseFilter = ({clearFilter, filterLicenses, license}) => {
             clearFilter();
         }
     }
+
+    const selectBtn = () => {
+        if (selectMultiple) {
+            setSelectMultiple(false)
+        } else {
+            setSelectMultiple(true)
+        }
+        console.log(selectMultiple)
+    }
+
     return (
-        <form>
-            <h3 className='text-center'>Filter Licenses</h3>
-                <input style={{maxWidth: '400px', margin: '0 auto 20px'}} ref={text} type="text" placeholder="Type something..." onChange={onChange}/>
-        </form>
+        <section className='flex-form-container px-1'>
+
+            <form>
+                    <input style={{minWidth: '500px', margin: '0 auto 20px'}} ref={text} type="text" placeholder="Filter licenses..." onChange={onChange}/>
+            </form>
+            <div className='box'>
+                <button style={{margin: '1.2rem 0'}} className='btn' onClick={() => selectBtn()}>Select Multiple</button>
+                {selectMultiple && <button style={{margin: '1.2rem 0'}} className='btn btn-danger'>Delete Selected</button>}
+            </div>
+
+        </section>
+
     )
 }
 

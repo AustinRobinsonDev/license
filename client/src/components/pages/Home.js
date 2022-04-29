@@ -8,16 +8,24 @@ import LicenseForm from '../license/LicenseForm';
 import LicenseFilter from '../license/LicenseFilter';
 import Licenses from '../license/Licenses';
 const Home = ({ auth, loadUser, clearCurrent, license }) => {
+
+    // splice 
+    // indexOf
+    // find
+
     const [action, setAction] = useState('list');
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState('');
+    const [selectMultiple, setSelectMultiple] = useState(false);
+    const [deleteList, setDeleteList] = useState([]);
     useEffect(() => {
+        console.log(deleteList)
         window.onpopstate = () => {
             clearCurrent();
           }
         if (auth.isAuthenticated) loadUser();
         //eslint-disable-next-line
-    }, [action, deleteId])  
+    }, [action, deleteId, selectMultiple])  
     if (auth.loading) {
         return (
             <div className='loading-container'>{loading()}</div>
@@ -39,10 +47,13 @@ const Home = ({ auth, loadUser, clearCurrent, license }) => {
             </div>
             <hr className='m-2'/>    
              <div className='px-3'>
-                <LicenseFilter />
+                <LicenseFilter selectMultiple={selectMultiple} setSelectMultiple={setSelectMultiple} />
                 <Licenses 
+                    selectMultiple={selectMultiple}
                     setShowModal={setShowModal}
                     setDeleteId={setDeleteId}
+                    deleteList={deleteList}
+                    setDeleteList={setDeleteList}
                     action={action}
                     setAction={setAction} />
             </div>
