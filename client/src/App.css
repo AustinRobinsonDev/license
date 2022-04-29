@@ -30,6 +30,11 @@ a {
   text-decoration: none;
 }
 
+.footer {
+  min-height: 75px;
+  padding: 20px;
+}
+
 label:hover {
   cursor: pointer;
 }
