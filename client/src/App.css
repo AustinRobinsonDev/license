@@ -53,7 +53,8 @@ img {
 }
 
 .img-sm {
-  width: 75px;
+max-width: 100px;
+margin: 0 10px
 }
 
 /* Utilities */

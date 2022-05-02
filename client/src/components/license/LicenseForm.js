@@ -22,8 +22,7 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
     const onChange = e => {
         setLicense2({ ...license2, [e.target.name]: e.target.value});
     }
-    const onChangeDoc = e => {
-    }
+
     useEffect(() => {
  //       setAction('formRendered')
         setLocalLicense(license.current)
@@ -43,7 +42,7 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
                 state: ''
             });
         }
-    }, [action, localLicense, show, document]);
+    }, [action, localLicense]);
     const clearAll = () => {
         clearCurrent();
         setLicense2({        
@@ -67,7 +66,8 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
             await addLicense(license2);
             clearAll();
             setAction('License added');
-            setAlert("Added successfully", "success")
+            setAlert("Added successfully", "success");
+            console.log("object sent to add license: ", + license2)
         } else {
             setAction('updated');
             await updateLicense(license2);
@@ -76,17 +76,18 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
         } 
     };
 
-    const btnVisibility = () => {
-        if (show === false) setShow(true);
-        if (show === true) setShow(false);
+    const btnVisibility = (e) => {
+        e.preventDefault();
+        setShow(!show);
     }
 
-    // save img
+    // save img as base64 for Buffer
     const saveImage = async e => {
         e.preventDefault();
         const file = e.target.files[0];
         const base64Img = await convertBase64(file);
         setDocument(base64Img);
+        console.log("base64 img: " + document)
     }
     const convertBase64 = file => {
         return new Promise((resolve, reject) => {
@@ -161,8 +162,8 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
                 <label>
                     {hasDocuments && <p>Documents: </p>}
                     {renderInput()}
-                    {document ? <button onClick={() => btnVisibility()}>{show ? "Hide document" : "Show document"}</button> : <p></p>}
-                    {show && <img src={document} />}
+                    {document ? <button onClick={(e) => btnVisibility(e)}>{show ? "Hide document" : "Show document"}</button> : <p></p>}
+                    {show && <img className='img-sm' src={document} />}
                 </label>
             </div>
             <div className='px-2'>
