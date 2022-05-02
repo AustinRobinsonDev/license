@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 /* Global Styles */
 :root {
   --primary-color: #bdac9b;
@@ -16,17 +16,24 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: rgb(218, 219, 208);
   color: #333;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
   color: var(--primary-color);
   text-decoration: none;
+}
+
+.footer {
+  min-height: 75px;
+  padding: 20px;
+  font-weight:100;
 }
 
 label:hover {
@@ -67,8 +74,22 @@ img {
 }
 
 .user-container {
+  padding: 2rem 3rem;
   margin: 20px auto 0;
   max-width: 600px;
+  border: 3px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 7px 3px rgba(53, 53, 53, 0.555);
+}
+
+.about-container {
+  padding: 4rem 2rem;
+  margin: 20px auto 0;
+  max-width: 800px;
+  border: 3px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 7px 3px rgba(53, 53, 53, 0.555);
+  height: 500px
 }
 
 .loading-container {
@@ -86,9 +107,9 @@ img {
 }
 
 .user-info {
-  border-radius: 10px;
-  padding: 2rem;
-  border: solid black 1px;
+
+  padding: 0 2rem;
+
 }
 
 .text-white{
@@ -106,6 +127,18 @@ img {
   font-size: 3rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+}
+
+.medium {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: .5rem;
+}
+
+.title {
+  width: 50%;
+  margin: 0 auto;
+  padding-right: 5.5rem;
 }
 
 .lead {
@@ -152,12 +185,11 @@ img {
   box-shadow: 0 2px 1px 1px rgba(53, 53, 53, 0.555);
 }
 
-.show-img{
-  visibility: visible;
-}
-
-.hide-img{
-  visibility: hidden;
+.licenses-container {
+  max-height: 500px;
+  min-height: 500px;
+  overflow-y: scroll;
+  width: 100%;
 }
 
 /* List */

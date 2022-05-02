@@ -5,7 +5,7 @@ const Profile = ({ auth, license }) => {
     const { user } = auth;
     const { licenses } = license;
     return (
-        <main className='px-2 py-2 user-container'>
+        <main className='user-container'>
             <h1 className='text-center ul my-2'>User information</h1>
             <section className='user-info'>
                 <img className='round-img img-sm' src={avatar} alt="" />
