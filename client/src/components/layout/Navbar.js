@@ -52,8 +52,8 @@ const Navbar = ({ auth, logout, clearLicense, loadUser, clearCurrent }) => {
 
     return (
         <div className='navbar bg-primary'>
-        <Link to={'/'}><h1 className='text-dark'>License Manager</h1></Link>
-            <h2 className='text-center p-2'>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
+        <Link to={'/'}><h1 className='text-dark medium'>License Manager</h1></Link>
+            <h2 className='text-center title'>{user && "Hello " + user.fName.charAt(0).toUpperCase() + user.fName.slice(1) + " " +  user.lName.charAt(0).toUpperCase() + user.lName.slice(1) + " "}</h2> 
             <ul>
                 {renderNav()}
             </ul>
