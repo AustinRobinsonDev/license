@@ -30,6 +30,7 @@ const LicenseDetails = ({ auth, license }) => {
                     <h4 className='my-1'>Email address: { localCurrent.emailPrimary }</h4>
                     <h4 className='my-1'>Phone number: { localCurrent.phonePrimary }</h4>
                 </div>
+                <img className='img-sm' src={localCurrent.image} />
             </section>
         </main>
     )
