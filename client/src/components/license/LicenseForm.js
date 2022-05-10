@@ -104,13 +104,13 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
         })
     }
 
-    const renderInput = () => {
-        if (hasDocuments || document) {
-            return <input type='file' onChange={(e) => saveImage(e)} />
-        } else {
-            return <p></p>
-        }
-    }
+    // const renderInput = () => {
+    //     if (hasDocuments || document) {
+    //         return <input type='file' onChange={(e) => saveImage(e)} />
+    //     } else {
+    //         return <p></p>
+    //     }
+    // }
 
     return (
         <>
@@ -160,12 +160,14 @@ const LicenseForm = ({ setAlert, addLicense, updateLicense, license, clearCurren
                 </label>
                 <br />
                 <label>
-                    {hasDocuments && <p>Documents: </p>}
-                    {renderInput()}
+                    <p>Documents: </p>
+                    <input type='file' onChange={(e) => saveImage(e)} />
                     {document ? <button onClick={(e) => btnVisibility(e)}>{show ? "Hide document" : "Show document"}</button> : <p></p>}
-                    {show && <img className='img-sm' src={document} />}
                 </label>
+                {show && <img className='img-sm' src={document} />}
+
             </div>
+
             <div className='px-2'>
                 <input type="submit" value={license.current ? 'Update' : 'Add License'} className="btn btn-primary btn-block"/>
             </div>
