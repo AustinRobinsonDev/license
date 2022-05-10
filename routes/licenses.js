@@ -27,8 +27,9 @@ async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()})
     }
-    const { title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type } = req.body;
+    const { title, image, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type } = req.body;
     try {
+        let imgData = new Buffer.from(image.split(",")[1],"base64")
         const newLicense = new License({
             title,
             orderId: Date.now(),
@@ -37,11 +38,13 @@ async (req, res) => {
             dateCreated: Date.now(),
             contactFirstName,
             contactLastName,
+            image:imgData,
             emailPrimary,
             phonePrimary,
             type,
             user: req.user.id
         })
+
         const license = await newLicense.save();
         res.json(license);
     } catch (err) {
@@ -53,7 +56,7 @@ async (req, res) => {
 
 // PUT api/licenses/:id, Update license, Private
 router.put('/:id', auth, async (req, res) => {
-    const {title, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type} = req.body;
+    const {title, image, orderId, remainingBalance, hasDocuments, dateCreated, contactFirstName, contactLastName, emailPrimary, phonePrimary, type} = req.body;
 
     const licenseFields = {};
     if(title) licenseFields.title = title;
@@ -65,6 +68,7 @@ router.put('/:id', auth, async (req, res) => {
     if(contactLastName) licenseFields.contactLastName = contactLastName;
     if(emailPrimary) licenseFields.emailPrimary = emailPrimary;
     if(phonePrimary) licenseFields.phonePrimary = phonePrimary;
+    if(image) licenseFields.image = image;
     if(type) licenseFields.type = type;
     try {
         let license = await License.findById(req.params.id);
@@ -82,16 +86,31 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
-// DELETE api/license/:id, Delete license, Private
-router.delete('/:id', auth, async (req, res) => {
+// DELETE api/license/, Delete license, Private
+router.delete('/', auth, async (req, res) => {
     try {
-        let license = await License.findById(req.params.id);
-        if(!license) return res.status(404).json({ msg: 'License not found'});
-        if (license.user.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'Not authorized'});
+        if (id.isArray()) {
+            for (let i = 0; i < id.length; i++) {
+                let license = await License.findById(req.params.id);
+                if(!license) return res.status(404).json({ msg: 'License not found' });
+                if (license.user.toString() !== req.user.id) {
+                    return res.status(401).json({ msg: 'Not authorized' });
+                }
+
+                await License.deleteMany({ _id : { $in: id }})
+            }
+        } else {
+            let license = await License.findById(req.params.id);
+            if(!license) return res.status(404).json({ msg: 'License not found' });
+            if (license.user.toString() !== req.user.id) {
+                return res.status(401).json({ msg: 'Not authorized' });
+            }
+
+            await License.findByIdAndRemove(req.params.id);
+            res.json({ msg: 'License removed' });
         }
-        await License.findByIdAndRemove(req.params.id);
-        res.json({ msg: 'License removed'});
+
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('server error');

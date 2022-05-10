@@ -107,6 +107,25 @@ margin: 0 10px
   max-width: 1000px;
 }
 
+.flex-form-container {
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+}
+
+
+.box:first-child > span { margin-right: auto; }
+
+.box:last-child  > span { margin-left: auto;  }
+
+/* non-essential */
+/* .box {
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: lightgreen;
+  height: 40px;
+} */
+
 .user-info {
 
   padding: 0 2rem;
@@ -296,7 +315,6 @@ margin: 0 10px
 .btn {
   display: inline-block;
   background: var(--light-color);
-
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -494,6 +512,13 @@ table th {
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
   height: 7rem;
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar ul {

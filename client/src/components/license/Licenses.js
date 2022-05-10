@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getLicenses } from '../../store/actions/licenseActions'
 import { connect } from 'react-redux';
 import LicenseItem from '../license/LicenseItem';
-import { loading } from '../layout/Loading';
-const Licenses = ({ setShowModal, setDeleteId, setAction, action, license, auth, getLicenses}) => {
+
+const Licenses = ({ deleteList, setDeleteList, selectMultiple, setShowModal, setDeleteId, setAction, action, license, auth, getLicenses}) => {
     const [licenseList, setLicenseList] = useState([]);
     const getAllLicenses = async () => {
       const allLicenses = await getLicenses();
@@ -21,17 +21,16 @@ const Licenses = ({ setShowModal, setDeleteId, setAction, action, license, auth,
               {license.licenses !== null && !auth.loading ? (
                 license.filtered !== null
                   ? license.filtered.map(license => (
-                        <LicenseItem key={license._id} setShowModal={setShowModal} setDeleteId={setDeleteId} setAction={setAction} action={action} licenseItem={license} />
+                        <LicenseItem key={license._id} deleteList={deleteList} setDeleteList={setDeleteList} selectMultiple={selectMultiple} setShowModal={setShowModal} setDeleteId={setDeleteId} setAction={setAction} action={action} licenseItem={license} />
                     ))
                   : license.licenses.map(license=> (
-                        <LicenseItem key={license._id} setShowModal={setShowModal} setDeleteId={setDeleteId} setAction={setAction} action={action} licenseItem={license} />
+                        <LicenseItem key={license._id} deleteList={deleteList} setDeleteList={setDeleteList} selectMultiple={selectMultiple} setShowModal={setShowModal} setDeleteId={setDeleteId} setAction={setAction} action={action} licenseItem={license} />
                     ))
             ) : (
               <p></p>
             )}
           </div>
     )
-            
 }
 
 const mapStateToProps = state => ({
