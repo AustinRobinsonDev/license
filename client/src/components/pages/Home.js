@@ -9,10 +9,6 @@ import LicenseFilter from '../license/LicenseFilter';
 import Licenses from '../license/Licenses';
 const Home = ({ auth, loadUser, clearCurrent, license }) => {
 
-    // splice 
-    // indexOf
-    // find
-
     const [action, setAction] = useState('list');
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState('');

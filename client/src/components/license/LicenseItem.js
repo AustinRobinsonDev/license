@@ -73,7 +73,7 @@ const LicenseItem = ({ deleteList, setDeleteList, selectMultiple, setShowModal, 
                         <button name='delete' className='btn btn-danger btn-sm' onClick={() => onDelete()}>Delete</button>
 
                 </div>
-                {selectMultiple ? <input className='check' type='checkbox' checked={isChecked} onChange={(e) => {checkboxChange()} } /> : <Link className='btn btn-light btn-sm' to='/licenseDetails' onClick={() => moreInfo()} >More info</Link>}
+                {selectMultiple ? <input className='check' type='checkbox' checked={isChecked} onChange={(e) => checkboxChange(e)} /> : <Link className='btn btn-light btn-sm' to='/licenseDetails' onClick={() => moreInfo()} >More info</Link>}
             </div>
 
         </div>

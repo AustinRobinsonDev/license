@@ -19,7 +19,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// POST api/auth, Auth User & Get token, Public
+// POST api/auth, Login Auth User & Get token, Public
 router.post('/', 
 [   check('email', 'please include a valid email').isEmail(), 
     check('password', 'password is required').exists()
